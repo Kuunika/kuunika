@@ -1,8 +1,65 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "terminology-api": {
+      "root": "apps/terminology-api",
+      "sourceRoot": "apps/terminology-api/src",
+      "projectType": "application",
+      "prefix": "terminology-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/terminology-api",
+            "main": "apps/terminology-api/src/main.ts",
+            "tsConfig": "apps/terminology-api/tsconfig.app.json",
+            "assets": ["apps/terminology-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/terminology-api/src/environments/environment.ts",
+                  "with": "apps/terminology-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "terminology-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/terminology-api/.eslintrc",
+            "tsConfig": [
+              "apps/terminology-api/tsconfig.app.json",
+              "apps/terminology-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/terminology-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/terminology-api/jest.config.js",
+            "tsConfig": "apps/terminology-api/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/nest"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -48,5 +105,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "terminology-api"
 }
