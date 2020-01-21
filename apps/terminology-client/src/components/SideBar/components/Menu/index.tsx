@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import MenuItem from './components/MenuItem';
 import {
@@ -10,6 +10,8 @@ import {
   faUserShield
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector, useDispatch } from 'react-redux';
+import { setActivePage } from 'apps/terminology-client/src/services/redux/actions/ui';
 
 const MenuData = [
   {
@@ -51,6 +53,15 @@ const MenuData = [
 ] as Array<IMenuItem>;
 
 function Menu() {
+  const dispatch = useDispatch();
+  const activePage =
+    window.location.pathname.split('/')[1].length === 0
+      ? 'clinical'
+      : window.location.pathname.split('/')[1];
+
+  useEffect(() => {
+    dispatch(setActivePage(activePage));
+  });
   return <MenuView items={MenuData} />;
 }
 

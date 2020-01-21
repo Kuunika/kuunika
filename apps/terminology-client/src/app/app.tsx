@@ -9,6 +9,9 @@ import Page from '../Routes';
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import Store from '../services/redux/store';
+
 const ContentContainer = styled.div`
   padding: 30px;
   @media (max-width: 960px) {
@@ -18,20 +21,22 @@ const ContentContainer = styled.div`
 
 export const App = () => {
   return (
-    <Router>
-      <ContentContainer>
-        <Grid container spacing={4}>
-          <Hidden smDown>
-            <Grid item xs={12} sm={12} md={2} lg={2}>
-              <SideBar />
+    <Provider store={Store}>
+      <Router>
+        <ContentContainer>
+          <Grid container spacing={4}>
+            <Hidden smDown>
+              <Grid item xs={12} sm={12} md={2} lg={2}>
+                <SideBar />
+              </Grid>
+            </Hidden>
+            <Grid item xs={12} sm={12} md={10} lg={10}>
+              <Page />
             </Grid>
-          </Hidden>
-          <Grid item xs={12} sm={12} md={10} lg={10}>
-            <Page />
           </Grid>
-        </Grid>
-      </ContentContainer>
-    </Router>
+        </ContentContainer>
+      </Router>
+    </Provider>
   );
 };
 

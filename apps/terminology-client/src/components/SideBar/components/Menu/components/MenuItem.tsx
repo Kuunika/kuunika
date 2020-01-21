@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { State } from '../../../../../services/utils/@types';
+import { useSelector, useDispatch, useCall } from 'react-redux';
+import { setActivePage } from '../../../../../services/redux/actions/ui';
 
 function MenuItem({ item }: Props) {
-  return <MenuItemView item={item} />;
+  const activePage = useSelector((state: State) => state.ui.activePage);
+  const dispatch = useDispatch();
+  const onClick = useCallback(
+    item => {
+      dispatch(setActivePage(item.name));
+    },
+    [dispatch]
+  );
+  const isActive = () => item.name === activePage;
+
+  return <MenuItemView item={item} onClick={onClick} active={isActive()} />;
 }
 
 export default MenuItem;
