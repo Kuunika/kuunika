@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { State } from '../../../../../services/utils/@types';
-import { useSelector, useDispatch, useCall } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setActivePage } from '../../../../../services/redux/actions/ui';
 
 function MenuItem({ item }: Props) {

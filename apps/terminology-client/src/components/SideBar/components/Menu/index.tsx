@@ -39,13 +39,13 @@ const MenuData = [
     link: '/laboratory'
   },
   {
-    name: 'digital',
+    name: 'digital-health',
     displayName: 'Digital Health',
     icon: <FontAwesomeIcon icon={faDatabase} />,
     link: '/digital-health'
   },
   {
-    name: 'public',
+    name: 'public-health',
     displayName: 'Public Health',
     icon: <FontAwesomeIcon icon={faUserShield} />,
     link: '/public-health'

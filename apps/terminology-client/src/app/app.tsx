@@ -11,6 +11,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import Store from '../services/redux/store';
+import Search from '../components/Search';
 
 const ContentContainer = styled.div`
   padding: 30px;
@@ -31,6 +32,7 @@ export const App = () => {
               </Grid>
             </Hidden>
             <Grid item xs={12} sm={12} md={10} lg={10}>
+              <Search />
               <Page />
             </Grid>
           </Grid>
