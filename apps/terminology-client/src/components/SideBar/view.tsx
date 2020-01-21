@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../config/theme';
+import Menu from './components/Menu';
 
 function SideBarView() {
   return (
@@ -9,7 +10,7 @@ function SideBarView() {
       <SiteName>
         Malawi <br /> Terminology <br /> Dashboard.
       </SiteName>
-      <div>Menu</div>
+      <Menu />
     </Wrapper>
   );
 }

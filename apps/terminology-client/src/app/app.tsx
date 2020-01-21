@@ -5,6 +5,8 @@ import { Grid, Hidden } from '@material-ui/core';
 
 import SideBar from '../components/SideBar';
 
+import Page from '../Routes';
+
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 const ContentContainer = styled.div`
@@ -25,20 +27,7 @@ export const App = () => {
             </Grid>
           </Hidden>
           <Grid item xs={12} sm={12} md={10} lg={10}>
-            <Switch>
-              <Route exact path="/" component={() => <div>content</div>} />
-              <Route
-                exact
-                path="/services"
-                component={() => <div>content</div>}
-              />
-              <Route
-                exact
-                path="/connectivity"
-                component={() => <div>content</div>}
-              />
-              <Route exact path="/pids" component={() => <div>content</div>} />
-            </Switch>
+            <Page />
           </Grid>
         </Grid>
       </ContentContainer>
