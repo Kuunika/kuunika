@@ -1,20 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../config/theme';
-function CategoryBreadCrumb() {
+
+function CategoryBreadCrumb({ data }: Props) {
   return (
     <Wrapper>
-      <span>Category: </span>
-      <Location> Clinical</Location>
-      <Separator />
-      <Location>Terms</Location>
-      <Separator />
-      <Location>ICD10 </Location>
+      <b>Category: </b>
+      {data.map((text, index) => {
+        text = text.replace('-', ' ');
+        return (
+          <>
+            <Location>{text}</Location>
+            {index < data.length - 1 && <Separator />}
+          </>
+        );
+      })}
     </Wrapper>
   );
 }
 
 export default CategoryBreadCrumb;
+
+interface Props {
+  data: Array<string>;
+}
 
 const Wrapper = styled.h2`
   color: ${theme.darkColor};
@@ -23,8 +32,9 @@ const Wrapper = styled.h2`
 `;
 const Location = styled.i`
   cursor: pointer;
+  text-transform: capitalize;
 `;
-const Separator = styled.span`
+const Separator = styled.i`
   ::before {
     content: '/';
   }

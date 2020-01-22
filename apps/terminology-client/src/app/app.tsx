@@ -35,8 +35,6 @@ export const App = () => {
             </Hidden>
             <Grid item xs={12} sm={12} md={10} lg={10}>
               <Search />
-              <PageHeading>Clinical</PageHeading>
-              <CategoryBreadCrumb />
               <Page />
             </Grid>
           </Grid>
