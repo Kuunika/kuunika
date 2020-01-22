@@ -7,11 +7,13 @@ import SideBar from '../components/SideBar';
 
 import Page from '../Routes';
 
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import Store from '../services/redux/store';
 import Search from '../components/Search';
+import { PageHeading } from '../components/PageHeading/PageHeading';
+import CategoryBreadCrumb from '../components/CategoryBreadCrumb';
 
 const ContentContainer = styled.div`
   padding: 30px;
@@ -33,6 +35,8 @@ export const App = () => {
             </Hidden>
             <Grid item xs={12} sm={12} md={10} lg={10}>
               <Search />
+              <PageHeading>Clinical</PageHeading>
+              <CategoryBreadCrumb />
               <Page />
             </Grid>
           </Grid>
