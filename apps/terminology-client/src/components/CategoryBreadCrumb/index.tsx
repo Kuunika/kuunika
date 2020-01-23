@@ -9,10 +9,10 @@ function CategoryBreadCrumb({ data }: Props) {
       {data.map((text, index) => {
         text = text.replace('-', ' ');
         return (
-          <>
+          <span key={text}>
             <Location>{text}</Location>
             {index < data.length - 1 && <Separator />}
-          </>
+          </span>
         );
       })}
     </Wrapper>

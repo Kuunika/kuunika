@@ -34,7 +34,7 @@ export const MenuItemView = ({ item, active, onClick }: Props) => {
       data-test={`menu${item.name}`}
     >
       <Wrapper active={active}>
-        <Icon>{item.icon}</Icon>
+        {/* <Icon>{item.icon}</Icon> */}
         {item.displayName}
       </Wrapper>
     </Link>
@@ -45,7 +45,6 @@ interface Props {
   item: {
     name: string;
     displayName: string;
-    icon: JSX.Element;
     link: string;
   };
   active?: boolean;

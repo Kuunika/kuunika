@@ -12,56 +12,25 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActivePage } from 'apps/terminology-client/src/services/redux/actions/ui';
-
-const MenuData = [
-  {
-    name: 'clinical',
-    displayName: 'Clinical',
-    icon: <FontAwesomeIcon icon={faStethoscope} />,
-    link: '/'
-  },
-  {
-    name: 'medical',
-    displayName: 'Medical',
-    icon: <FontAwesomeIcon icon={faFirstAid} />,
-    link: '/medical'
-  },
-  {
-    name: 'pharmaceutical',
-    displayName: 'Pharmaceutical',
-    icon: <FontAwesomeIcon icon={faPills} />,
-    link: '/pharmaceutical'
-  },
-  {
-    name: 'laboratory',
-    displayName: 'Laboratory',
-    icon: <FontAwesomeIcon icon={faSyringe} />,
-    link: '/laboratory'
-  },
-  {
-    name: 'digital-health',
-    displayName: 'Digital Health',
-    icon: <FontAwesomeIcon icon={faDatabase} />,
-    link: '/digital-health'
-  },
-  {
-    name: 'public-health',
-    displayName: 'Public Health',
-    icon: <FontAwesomeIcon icon={faUserShield} />,
-    link: '/public-health'
-  }
-] as Array<IMenuItem>;
+import { State } from 'apps/terminology-client/src/services/utils/@types';
 
 function Menu() {
+  const categories = useSelector((state: State) => state.data.categories);
   const dispatch = useDispatch();
-  const activePage =
-    window.location.pathname.split('/')[1].length === 0
-      ? 'clinical'
-      : window.location.pathname.split('/')[1];
+  const activePage = window.location.pathname.split('/')[1];
 
   useEffect(() => {
     dispatch(setActivePage(activePage));
   });
+
+  const MenuData = categories
+    ? categories.map(category => ({
+        name: category.categoryTitle.toLowerCase(),
+        displayName: category.categoryTitle,
+        link: `/${category.categoryTitle.replace(' ', '-').toLowerCase()}`
+      }))
+    : [];
+
   return <MenuView items={MenuData} />;
 }
 
@@ -71,7 +40,7 @@ export const MenuView = (props: IViewProps) => {
   return (
     <Wrapper>
       {props.items.map(item => (
-        <MenuItem item={item} />
+        <MenuItem item={item} key={item.name} />
       ))}
     </Wrapper>
   );
@@ -82,7 +51,6 @@ interface Props {}
 interface IMenuItem {
   name: string;
   displayName: string;
-  icon: JSX.Element;
   link: string;
 }
 interface IViewProps {

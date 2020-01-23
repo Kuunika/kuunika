@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styled from 'styled-components';
 import { Grid, Hidden } from '@material-ui/core';
@@ -6,14 +6,11 @@ import { Grid, Hidden } from '@material-ui/core';
 import SideBar from '../components/SideBar';
 
 import Page from '../Routes';
+import { useDispatch } from 'react-redux';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-
-import { Provider } from 'react-redux';
-import Store from '../services/redux/store';
 import Search from '../components/Search';
-import { PageHeading } from '../components/PageHeading/PageHeading';
-import CategoryBreadCrumb from '../components/CategoryBreadCrumb';
+
+import { getCategories } from '../services/redux/actions/data';
 
 const ContentContainer = styled.div`
   padding: 30px;
@@ -22,25 +19,31 @@ const ContentContainer = styled.div`
   }
 `;
 
-export const App = () => {
+export function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  });
+
+  return <AppView />;
+}
+
+export const AppView = () => {
   return (
-    <Provider store={Store}>
-      <Router>
-        <ContentContainer>
-          <Grid container spacing={4}>
-            <Hidden smDown>
-              <Grid item xs={12} sm={12} md={2} lg={2}>
-                <SideBar />
-              </Grid>
-            </Hidden>
-            <Grid item xs={12} sm={12} md={10} lg={10}>
-              <Search />
-              <Page />
-            </Grid>
+    <ContentContainer>
+      <Grid container spacing={4}>
+        <Hidden smDown>
+          <Grid item xs={12} sm={12} md={2} lg={2}>
+            <SideBar />
           </Grid>
-        </ContentContainer>
-      </Router>
-    </Provider>
+        </Hidden>
+        <Grid item xs={12} sm={12} md={10} lg={10}>
+          <Search />
+          <Page />
+        </Grid>
+      </Grid>
+    </ContentContainer>
   );
 };
 
