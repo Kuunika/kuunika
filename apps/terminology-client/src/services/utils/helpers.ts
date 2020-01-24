@@ -8,6 +8,8 @@ export const getSubCategories = (categories, targetCategories = []) => {
       targetCategories[0].toLowerCase().replace('-', ' ')
   );
 
+  if (targetCategory.categories == null) return categories;
+
   return getSubCategories(
     targetCategory.categories,
     targetCategories.splice(1)

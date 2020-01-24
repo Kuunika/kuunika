@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Grid } from '@material-ui/core';
 import CategoryCard from '../../components/CategoryCard';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
@@ -25,30 +25,31 @@ function Category(props) {
         : `/${link.toLowerCase().replace(' ', '-')}`;
 
     props.history.push(link);
-    dispatch(setActivePage(window.location.pathname.split('/')[1]));
+    useCallback(() => {
+      dispatch(setActivePage(props.location.pathname.split('/')[1]));
+    }, [dispatch]);
   };
 
   useEffect(() => {
-    const locationArray = window.location.pathname.split('/');
+    const locationArray = props.location.pathname.split('/');
     const nextPageTitle =
       locationArray[1].length === 0
         ? 'All Categories'
         : locationArray[1].replace('-', ' ');
 
-    if (pageTitle != nextPageTitle) setPageTitle(nextPageTitle);
-  }, []);
+    setPageTitle(nextPageTitle);
+  }, [props.location.pathname]);
 
   useEffect(() => {
-    let locationArray = window.location.pathname.split('/');
+    let locationArray = props.location.pathname.split('/');
     locationArray =
       locationArray[1].length === 0 ? [] : [...locationArray].slice(1);
-    if (!lodash.isEqual(breadClumb, [...locationArray]))
-      setBreadClumb([...locationArray]);
-  }, []);
+    setBreadClumb([...locationArray]);
+  }, [props.location.pathname]);
 
   useEffect(() => {
     setData(
-      getSubCategories(categories, breadClumb).map(dt => ({
+      getSubCategories(categories, [...breadClumb]).map(dt => ({
         title: dt.categoryTitle,
         content: 'example content',
         onClick: () => onClick(dt.categoryTitle)
