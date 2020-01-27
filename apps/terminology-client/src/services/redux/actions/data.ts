@@ -7,3 +7,9 @@ export const getCategories = () => {
     payload: API.getCategories()
   };
 };
+
+export const getCategoryData = (id: string) => ({
+  type: actions.getCategoryData,
+  payload: API.getCategoryData(id),
+  meta: id
+});

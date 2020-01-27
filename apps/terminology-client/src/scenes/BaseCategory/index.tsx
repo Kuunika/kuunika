@@ -7,7 +7,6 @@ import { State } from '../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSubCategories } from '../../services/utils/helpers';
 import { setActivePage } from '../../services/redux/actions/ui';
-import lodash from 'lodash';
 
 function Category(props) {
   const [pageTitle, setPageTitle] = useState('');
@@ -18,7 +17,10 @@ function Category(props) {
 
   const [data, setData] = useState([]);
 
-  const onClick = (link: string) => {
+  const onClick = (category: any) => {
+    let link = category.id
+      ? `${category.categoryTitle}/view/${category.id}`
+      : category.categoryTitle;
     link =
       breadClumb.length > 0
         ? `/${breadClumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
@@ -52,7 +54,7 @@ function Category(props) {
       getSubCategories(categories, [...breadClumb]).map(dt => ({
         title: dt.categoryTitle,
         content: 'example content',
-        onClick: () => onClick(dt.categoryTitle)
+        onClick: () => onClick(dt)
       }))
     );
   }, [breadClumb, categories]);

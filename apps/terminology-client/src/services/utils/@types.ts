@@ -8,6 +8,7 @@ export interface IData {
     id: null | string | number;
     categories: Array<any>;
   }>;
+  categoryData: Object;
 }
 
 export interface State {

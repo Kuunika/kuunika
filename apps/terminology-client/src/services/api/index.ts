@@ -5,5 +5,9 @@ export default {
   getCategories: () => {
     const url = `${API_ENDPOINT}/categories`;
     return axios.get(url);
+  },
+  getCategoryData: (id: string) => {
+    const url = `${API_ENDPOINT}/sources/${id}`;
+    return axios.get(url);
   }
 };
