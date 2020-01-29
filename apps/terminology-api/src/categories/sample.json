@@ -1,0 +1,53 @@
+[{
+  "categoryTitle": "clinical",
+  "id": null,
+  "categories": [{
+    "categoryTitle": "terms",
+    "id": null,
+    "categories": [{
+      "categoryTitle": "icd10",
+      "id": "vmomo",
+      "categories": []
+    }, {
+      "categoryTitle": "icd9",
+      "id": "vmomo",
+      "categories": []
+    }]
+  }, {
+    "categoryTitle": "procedures",
+    "id": null,
+    "categories": [{
+      "categoryTitle": "who",
+      "id": "vmomo",
+      "categories": []
+    }]
+  }]
+}, {
+  "categoryTitle": "lab",
+  "id": null,
+  "categories": [{
+    "categoryTitle": "terms",
+    "id": null,
+    "categories": [{
+      "categoryTitle": "ministry",
+      "id": "vmomo",
+      "categories": []
+    }]
+  }]
+}, {
+  "categoryTitle": "pharm",
+  "id": null,
+  "categories": [{
+    "categoryTitle": "drugs",
+    "id": "vmomo",
+    "categories": []
+  }]
+}, {
+  "categoryTitle": "public health",
+  "id": null,
+  "categories": [{
+    "categoryTitle": "",
+    "id": "vmomo",
+    "categories": []
+  }]
+}]

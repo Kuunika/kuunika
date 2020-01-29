@@ -56,6 +56,31 @@
           }
         }
       }
+    },
+    "terminology-interfaces": {
+      "root": "libs/terminology-interfaces",
+      "sourceRoot": "libs/terminology-interfaces/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/terminology-interfaces/tsconfig.lib.json",
+              "libs/terminology-interfaces/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/terminology-interfaces/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/terminology-interfaces/jest.config.js",
+            "tsConfig": "libs/terminology-interfaces/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

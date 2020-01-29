@@ -13,6 +13,9 @@
   "projects": {
     "terminology-api": {
       "tags": []
+    },
+    "terminology-interfaces": {
+      "tags": []
     }
   }
 }
