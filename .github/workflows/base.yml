@@ -4,16 +4,24 @@ on:
     branches: 
       - development
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/setup-node@v1
-    - run: npm install
-    - run: npx nx build terminology-api
-    - uses: actions/checkout@master
-    - name: Publish to hub.docker.com/kuunika
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: kuunika/kuunika
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Setup Node.js for use with actions
+      - uses: actions/setup-node@v1.1.0
+      - run: npm i
+      - run: npx nx build terminology-api
+      - run: pwd
+#   publish:
+#     runs-on: ubuntu-18.04
+#     steps:
+#     - uses: actions/setup-node@v1
+#     - run: npm install
+#     - run: npx nx build terminology-api
+#     - uses: actions/checkout@master
+#     - name: Publish to hub.docker.com/kuunika
+#       uses: elgohr/Publish-Docker-Github-Action@master
+#       with:
+#         name: kuunika/kuunika
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
