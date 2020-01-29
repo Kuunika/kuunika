@@ -1,3 +1,3 @@
 FROM node:10
 WORKDIR /app
-COPY dist/apps/terminology-api .
+COPY ./dist/apps/terminology-api .
