@@ -1,19 +1,16 @@
 name: CD
 on: 
   push:
-    branches: 
-      - development
+    branches: [development, actions-test]
 jobs:
   publish:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
-    - name: Publish to hub.docker.com/kuunika
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: npm install
-    - run: npx nx build terminology-api
+    - run: npm install && npx nx build terminology-api
     - uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: kuunika/kuunika
