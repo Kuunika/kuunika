@@ -5,17 +5,25 @@ on:
       - development
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
     steps:
-      - name: building terminology service backend
-        run: npm install && npx nx build terminology-api
-  publish:
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@master
-    - name: Publish to hub.docker.com/kuunika
-      uses: elgohr/Publish-Docker-Github-Action@master
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        name: kuunika/kuunika
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+
+#   publish:
+#     runs-on: ubuntu-18.04
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: Publish to hub.docker.com/kuunika
+#       uses: elgohr/Publish-Docker-Github-Action@master
+#       with:
+#         name: kuunika/kuunika
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
