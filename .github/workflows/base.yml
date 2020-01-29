@@ -7,6 +7,11 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
+      - name: building terminology service backend
+        run: npm install && npx nx build terminology-api
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
     - uses: actions/checkout@master
     - name: Publish to hub.docker.com/kuunika
       uses: elgohr/Publish-Docker-Github-Action@master
