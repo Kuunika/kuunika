@@ -7,11 +7,11 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-      - name: Setup Node.js for use with actions
-      - uses: actions/setup-node@v1.1.0
-      - run: npm i
-      - run: npx nx build terminology-api
-      - run: pwd
+    - name: Setup Node.js for use with actions
+    - uses: actions/setup-node@v1.1.0
+    - run: npm i
+    - run: npx nx build terminology-api
+    - run: pwd
 #   publish:
 #     runs-on: ubuntu-18.04
 #     steps:
