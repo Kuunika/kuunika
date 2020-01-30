@@ -1,5 +1,5 @@
 
 export interface Heading {
-    heading: string;
-    headingValue: string | number;
+    title: string;
+    value: string | number;
 }

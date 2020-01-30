@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { ConceptFromOCL } from '../ocl-interfaces/concept-from-ocl.interface';
 import {
   SearchResult,
-  Search,
-  SearchCategory
+  Search
 } from '@kuunika/terminology-interfaces';
 import * as Fuse from 'fuse.js';
 import * as axios from 'axios';
@@ -19,6 +18,11 @@ export class SearchService {
     const categoriesFromOCL: CategoryFromOCL[] = await this.oclService.requestAllCategories();
     const searchResults: SearchResult[] = await this.buildSearchResultsList(categoriesFromOCL, searchTerm);
 
+    if(searchResults.length === 0) throw new HttpException({
+      error: 'No Results Found',
+      status: 404
+    },HttpStatus.NOT_FOUND);
+
     return {
       searchTerm,
       searchResults
@@ -30,7 +34,8 @@ export class SearchService {
     const searchResults: SearchResult[] = [];
     for (const category of categoriesFromOCL) {
       const conceptsFromCategory: ConceptFromOCL[] = await this.oclService.requestAllConceptsFromCategory(category.extras.Route);
-      searchResults.push(this.buildSearchResult(conceptsFromCategory, category, searchTerm));
+      const searchResult = this.buildSearchResult(conceptsFromCategory, category, searchTerm);
+      if(searchResult.numberOfResults > 0) searchResults.push(searchResult);
     }
     return searchResults;
   }

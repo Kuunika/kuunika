@@ -9,7 +9,7 @@ export class SourcesController {
 
     @Get('/:sourceId')
     getSource(@Param('sourceId') sourceId: string, @Query('filterTerm') filterTerm = '') {
-        return this.sourcesService.getSource(sourceId);
+        return this.sourcesService.getSource(sourceId, filterTerm);
     }
 
     @Get('/:sourceId/:conceptId')

@@ -9,7 +9,7 @@ require('dotenv').config();
 @Injectable()
 export class OclService {
 
-    buildRequestHeaderForOCL(){
+    private buildRequestHeaderForOCL(){
         return {
             headers:{
                     Authorization: process.env.OCL_API_KEY,
@@ -20,33 +20,58 @@ export class OclService {
 
     async requestAllCategories(): Promise<CategoryFromOCL[]>{
         const oclCategoriesUrl: string = process.env.OCL_API + process.env.OCL_CATEGORIES_API_URL + 'concepts?verbose=true&limit=0'
-        const axiosRequest = await axios.default.get<CategoryFromOCL[]>(oclCategoriesUrl,this.buildRequestHeaderForOCL());
-        this.responseStatus(axiosRequest);
-        return axiosRequest.data;
+        try {
+            const axiosRequest = await axios.default.get<CategoryFromOCL[]>(oclCategoriesUrl,this.buildRequestHeaderForOCL());
+            return axiosRequest.data;
+        } catch (error) {
+            console.error(error.response.statusText);
+            this.responseStatus(error.response.status);
+        }   
+    }
+
+    async requestCategory(categoryId: string): Promise<CategoryFromOCL>{
+        try {
+            const oclCategoriesUrl: string = process.env.OCL_API + process.env.OCL_CATEGORIES_API_URL + `concepts/${categoryId}?verbose=true&limit=0`
+            const axiosRequest = await axios.default.get<CategoryFromOCL>(oclCategoriesUrl,this.buildRequestHeaderForOCL());
+            return axiosRequest.data;
+        } catch (error) {
+            console.error(error.response.statusText);
+            this.responseStatus(error.response.status);
+        }
     }
 
     async requestAllConceptsFromCategory(sourceUrl: string): Promise<ConceptFromOCL[]>{
-        const oclConceptsUrl = process.env.OCL_API + sourceUrl + `concepts?verbose=true&limit=0`;
-        const axiosRequest = await axios.default.get<ConceptFromOCL[]>(oclConceptsUrl,this.buildRequestHeaderForOCL());
-        this.responseStatus(axiosRequest)
-        return axiosRequest.data;
+        try {
+            const oclConceptsUrl = process.env.OCL_API + sourceUrl + `concepts?verbose=true&limit=0`;
+            const axiosRequest = await axios.default.get<ConceptFromOCL[]>(oclConceptsUrl,this.buildRequestHeaderForOCL());
+            return axiosRequest.data;
+        } catch (error) {
+            console.error(error.response.statusText);
+            this.responseStatus(error.response.status);
+        }
+        
     }
 
     async requestConcept(sourceUrl: string, conceptId: string): Promise<ConceptFromOCL> {
-        const oclConceptsUrl = process.env.OCL_API + sourceUrl + `concepts/${conceptId}` + '?verbose=true&limit=0';
-        const axiosRequest = await axios.default.get<ConceptFromOCL>(oclConceptsUrl,this.buildRequestHeaderForOCL());
-        this.responseStatus(axiosRequest)
-        return axiosRequest.data;
+        try {
+            const oclConceptsUrl = process.env.OCL_API + sourceUrl + `concepts/${conceptId}` + '?verbose=true&limit=0';
+            const axiosRequest = await axios.default.get<ConceptFromOCL>(oclConceptsUrl,this.buildRequestHeaderForOCL());
+            return axiosRequest.data;
+        } catch (error) {
+            console.error(error.response.statusText);
+            this.responseStatus(error.response.status);
+        }
+       
     }
 
-    responseStatus(axiosRequest: axios.AxiosResponse){
-        if(axiosRequest.status === 404){
+    private responseStatus(axiosRequest: number){
+        
+        if(axiosRequest === 404){
             throw new HttpException({
                 error: 404,
                 message: 'Source/Concept Not Found',
             },HttpStatus.NOT_FOUND)
-        }else if(axiosRequest.status !== 200){
-            console.error(axiosRequest.statusText);
+        }else if(axiosRequest !== 200){
             throw new HttpException({
                 error: 500,
                 message: 'Internal Server Error'

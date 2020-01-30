@@ -24,16 +24,6 @@ describe('SearchService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return categories and number of results from the searched term', () => {
-    //Arrange
-    
-    //Act
-    //const searchResult = service.buildSearchResult(icd10Concepts,'DERW32','Clinical/Terms/ICD10','flaccid paralysis',["id","ICD 10 Name","Vernacular Name","ICD10 Code", "ICD 10 Description"])
-    //Assert
-    //console.log(searchResult);
-    expect(true).toBe(true);
-  });
-
   each([searchTestData1]).it('should create a search object from term',(searchTerm: string,categories: CategoryFromOCL[], concepts: ConceptFromOCL[][], expected: Search)=>{
     //arrange 
     const searchResults: SearchResult[] = [];

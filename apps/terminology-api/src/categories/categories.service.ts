@@ -59,6 +59,8 @@ export class CategoriesService {
   }
 
   buildBreadcrumbObject(conceptsFromOcl: CategoryFromOCL[]) {
+    console.log(typeof(conceptsFromOcl));
+    
     return conceptsFromOcl.map(concept => {
       return {
         breadcrumb: concept.extras.Category,

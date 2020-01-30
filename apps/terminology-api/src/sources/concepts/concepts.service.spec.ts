@@ -25,11 +25,7 @@ describe('ConceptsService', () => {
   });
 
   each(testData).test('should format concept returning object based on headings',(concept, headings,breadcrumb ,result) => {
-      //Arrange
-      
-      //Act
       const conceptDescription = service.buildTermDescription(concept, breadcrumb,headings);
-      //Assert
       expect(conceptDescription).toEqual(result);
   })
 });
