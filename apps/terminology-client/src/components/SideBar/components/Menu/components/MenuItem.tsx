@@ -48,7 +48,7 @@ interface Props {
     link: string;
   };
   active?: boolean;
-  onClick?: any;
+  onClick?: Function;
 }
 
 const Wrapper = styled('div')<{ active: boolean }>`

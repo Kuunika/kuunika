@@ -23,7 +23,7 @@ function Heading({ data }: Props) {
 export default Heading;
 
 interface Props {
-  data: Array<any>;
+  data: Array<{ title: string; value: string }>;
 }
 const Wrapper = styled.div`
   margin: 1rem 0rem;

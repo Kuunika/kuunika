@@ -4,7 +4,7 @@ import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import Table from './components/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryData } from '../../services/redux/actions/data';
-import { State } from '../../services/utils/@types';
+import { State, CategoryData } from '../../services/utils/@types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -45,7 +45,7 @@ function Concepts(props) {
 
   return (
     <ConceptsView
-      data={{ ...data, formatedData }}
+      data={{ ...data, formatedData } as CategoryData}
       breadCrumb={breadClumb}
       onChangeSearch={onChangeSearch}
       filter={search}
@@ -55,7 +55,7 @@ function Concepts(props) {
 
 export default Concepts;
 
-function ConceptsView({ data, breadCrumb, onChangeSearch, filter }) {
+function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
   return (
     <Wrapper>
       <TableTitleContainer>
@@ -86,6 +86,12 @@ function ConceptsView({ data, breadCrumb, onChangeSearch, filter }) {
   );
 }
 
+interface ViewProps {
+  data: CategoryData;
+  breadCrumb: Array<string>;
+  onChangeSearch: Function;
+  filter: string;
+}
 const Wrapper = styled.div`
   background: #f4f4f4;
   padding: 2rem;

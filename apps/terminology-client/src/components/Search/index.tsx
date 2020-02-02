@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  MouseEvent,
+  MouseEventHandler,
+  FocusEventHandler
+} from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +15,7 @@ function Search() {
   const [search, setSearch] = useState('');
   const handleClickAway = () => setOpen(false);
   const onFocus = () => setOpen(true);
+
   return (
     <SearchView
       searchOpen={open}
@@ -30,15 +36,21 @@ export function SearchView(props: ViewProps) {
         <InputGroup>
           <Input
             placeholder="Search"
-            onFocus={props.onFocus}
+            onFocus={props.onFocus as FocusEventHandler<any>}
             onChange={e => props.onChange(e.target.value)}
             value={props.search}
           ></Input>
           <Addon>
             {props.searchOpen && props.search.length > 0 ? (
-              <FontAwesomeIcon icon={faTimes} onClick={props.handleClickAway} />
+              <FontAwesomeIcon
+                icon={faTimes}
+                onClick={props.handleClickAway as MouseEventHandler<any>}
+              />
             ) : (
-              <FontAwesomeIcon icon={faSearch} onClick={props.onFocus} />
+              <FontAwesomeIcon
+                icon={faSearch}
+                onClick={props.onFocus as MouseEventHandler<any>}
+              />
             )}
           </Addon>
         </InputGroup>
@@ -51,8 +63,8 @@ export function SearchView(props: ViewProps) {
 
 interface ViewProps {
   searchOpen: boolean;
-  handleClickAway: any;
-  onFocus: any;
+  handleClickAway: (event: MouseEvent<Document>) => void;
+  onFocus: Function;
   search: string;
   onChange: Function;
 }

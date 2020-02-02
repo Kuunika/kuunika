@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import CategoryCard from '../../components/CategoryCard';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { PageHeading } from '../../components/PageHeading/PageHeading';
-import { State } from '../../services/utils/@types';
+import { State, Category as ICategory } from '../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSubCategories } from '../../services/utils/helpers';
 import { setActivePage } from '../../services/redux/actions/ui';
@@ -17,7 +17,7 @@ function Category(props) {
 
   const [data, setData] = useState([]);
 
-  const onClick = (category: any) => {
+  const onClick = (category: ICategory) => {
     let link = category.id
       ? `${category.categoryTitle}/view/${category.id}`
       : category.categoryTitle;

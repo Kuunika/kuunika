@@ -1,4 +1,9 @@
-export const getSubCategories = (categories, targetCategories = []) => {
+import { Category } from './@types';
+
+export const getSubCategories = (
+  categories: Array<Category>,
+  targetCategories = [] as Array<string>
+) => {
   if (targetCategories.length === 0 || categories.length == 0)
     return categories;
 
