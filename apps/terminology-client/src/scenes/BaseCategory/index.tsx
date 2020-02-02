@@ -27,9 +27,8 @@ function Category(props) {
         : `/${link.toLowerCase().replace(' ', '-')}`;
 
     props.history.push(link);
-    useCallback(() => {
-      dispatch(setActivePage(props.location.pathname.split('/')[1]));
-    }, [dispatch]);
+
+    dispatch(setActivePage(link.split('/')[1]));
   };
 
   useEffect(() => {
@@ -65,7 +64,7 @@ function Category(props) {
       {breadClumb.length > 0 && <CategoryBreadCrumb data={breadClumb} />}
       <Grid container spacing={4}>
         {data.map(({ title, content, onClick }) => (
-          <Grid item xs={12} sm={12} md={4} lg={4}>
+          <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
             <CategoryCard
               key={title}
               title={title}

@@ -13,3 +13,9 @@ export const getCategoryData = (id: string) => ({
   payload: API.getCategoryData(id),
   meta: id
 });
+
+export const getConcept = (id: string, conceptId: string) => ({
+  type: actions.getConcept,
+  payload: API.getConcept(id, conceptId),
+  meta: `${id}${conceptId}`
+});

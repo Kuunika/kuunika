@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Pagination from './components/Pagination';
+import { useParams, useHistory } from 'react-router-dom';
 
 function Table({ headings, data }: Props) {
   const [page, setPage] = useState(0);
@@ -11,6 +12,8 @@ function Table({ headings, data }: Props) {
     numberOfPages: 0,
     pageNumber: 0
   });
+
+  const history = useHistory();
 
   const [formatedData, setFormatedData] = useState([]);
   const count = 10;
@@ -33,6 +36,9 @@ function Table({ headings, data }: Props) {
     });
   }, [page, data]);
 
+  const onConceptClick = conceptId => {
+    history.push(`${history.location.pathname}/${conceptId}`);
+  };
   const onChangePage = (action: 'next' | 'prev' | 'first' | 'last') => {
     switch (action) {
       case 'first':
@@ -57,29 +63,34 @@ function Table({ headings, data }: Props) {
       data={formatedData}
       meta={meta}
       onChangePage={onChangePage}
+      onClick={onConceptClick}
     />
   );
 }
 
 export default Table;
 
-function TableView({ headings, data, meta, onChangePage }: ViewProps) {
+function TableView({ headings, data, meta, onChangePage, onClick }: ViewProps) {
   return (
     <div>
       <TableWrapper>
-        <TableHeadersRow>
-          {headings.map(t => (
-            <Th key={t}>{t}</Th>
-          ))}
-        </TableHeadersRow>
-        <TableHeadersRow />
-        {data.map(d => (
-          <TableRow key={d.id}>
+        <thead>
+          <TableHeadersRow>
             {headings.map(t => (
-              <Td key={`${d.id}${t}`}>{d[t]}</Td>
+              <Th key={t}>{t}</Th>
             ))}
-          </TableRow>
-        ))}
+          </TableHeadersRow>
+          <TableHeadersRow />
+        </thead>
+        <tbody>
+          {data.map(d => (
+            <TableRow key={d.id} onClick={() => onClick(d.id)}>
+              {headings.map(t => (
+                <Td key={`${d.id}${t}`}>{d[t]}</Td>
+              ))}
+            </TableRow>
+          ))}
+        </tbody>
       </TableWrapper>
       <TableFooter>
         <div>
@@ -110,6 +121,7 @@ interface ViewProps {
     pageNumber: number;
   };
   onChangePage: Function;
+  onClick: Function;
 }
 
 const TableWrapper = styled.table`

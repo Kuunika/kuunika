@@ -29,6 +29,7 @@ const Wrapper = styled.h2`
   color: ${theme.darkColor};
   font-size: 1.8rem;
   font-weight: 550;
+  display: inline-block;
 `;
 const Location = styled.i`
   cursor: pointer;

@@ -8,7 +8,15 @@ const initialState = {
       sourceHeadings: [],
       results: []
     }
-  }
+  } as Object,
+  concept: {
+    default: {
+      id: null,
+      headings: [],
+      descriptions: [],
+      breadcrumb: ''
+    }
+  } as Object
 } as IData;
 
 export default (
@@ -26,6 +34,14 @@ export default (
         ...state,
         categoryData: {
           ...state.categoryData,
+          [action.meta]: action.payload.data
+        }
+      };
+    case actions.getConcept + '_FULFILLED':
+      return {
+        ...state,
+        concept: {
+          ...state.concept,
           [action.meta]: action.payload.data
         }
       };

@@ -9,6 +9,12 @@ export interface IData {
     categories: Array<any>;
   }>;
   categoryData: Object;
+  concept: {
+    breadcrumb: string;
+    headings: Array<Object>;
+    descriptions: Array<Object>;
+    id: string;
+  };
 }
 
 export interface State {

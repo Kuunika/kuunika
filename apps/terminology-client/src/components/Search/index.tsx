@@ -7,6 +7,7 @@ import SearchResults from './components/SearchResults';
 
 function Search() {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const handleClickAway = () => setOpen(false);
   const onFocus = () => setOpen(true);
   return (
@@ -14,6 +15,8 @@ function Search() {
       searchOpen={open}
       handleClickAway={handleClickAway}
       onFocus={onFocus}
+      search={search}
+      onChange={setSearch}
     />
   );
 }
@@ -25,16 +28,22 @@ export function SearchView(props: ViewProps) {
     <ClickAwayListener onClickAway={props.handleClickAway}>
       <Wrapper>
         <InputGroup>
-          <Input placeholder="Search" onFocus={props.onFocus}></Input>
+          <Input
+            placeholder="Search"
+            onFocus={props.onFocus}
+            onChange={e => props.onChange(e.target.value)}
+            value={props.search}
+          ></Input>
           <Addon>
-            {props.searchOpen ? (
+            {props.searchOpen && props.search.length > 0 ? (
               <FontAwesomeIcon icon={faTimes} onClick={props.handleClickAway} />
             ) : (
               <FontAwesomeIcon icon={faSearch} onClick={props.onFocus} />
             )}
           </Addon>
         </InputGroup>
-        <SearchResults open={props.searchOpen} />
+
+        <SearchResults open={props.searchOpen && props.search.length > 0} />
       </Wrapper>
     </ClickAwayListener>
   );
@@ -44,6 +53,8 @@ interface ViewProps {
   searchOpen: boolean;
   handleClickAway: any;
   onFocus: any;
+  search: string;
+  onChange: Function;
 }
 
 const Wrapper = styled.div`
