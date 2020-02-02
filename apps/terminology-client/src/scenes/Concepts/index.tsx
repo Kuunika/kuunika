@@ -30,8 +30,10 @@ function Concepts(props) {
   }, [search, data]);
 
   useEffect(() => {
-    if (props.match.params.id) dispatch(getCategoryData(props.match.params.id));
+    if (props.match.params.id && data.results.length == 0)
+      dispatch(getCategoryData(props.match.params.id));
   }, [props.match.params]);
+
   useEffect(() => {
     let locationArray = props.match.params[0].split('/');
     setBreadClumb([...locationArray]);

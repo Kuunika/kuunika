@@ -25,13 +25,19 @@ function Concept(props) {
   });
 
   useEffect(() => {
-    if (props.match.params.id && props.match.params.conceptId)
+    if (
+      props.match.params.id &&
+      props.match.params.conceptId &&
+      data.id == null
+    )
       dispatch(getConcept(props.match.params.id, props.match.params.conceptId));
   }, [props.match.params]);
+
   useEffect(() => {
     let locationArray = props.match.params[0].split('/');
     setBreadClumb([...locationArray]);
   }, [props.match.params]);
+
   return (
     <ConceptView data={data} breadCrumb={breadClumb} history={props.history} />
   );
