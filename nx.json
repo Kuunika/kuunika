@@ -13,6 +13,13 @@
   "projects": {
     "terminology-api": {
       "tags": []
+    },
+    "terminology-client": {
+      "tags": []
+    },
+    "terminology-client-e2e": {
+      "tags": [],
+      "implicitDependencies": ["terminology-client"]
     }
   }
 }
