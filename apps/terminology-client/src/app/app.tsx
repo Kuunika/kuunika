@@ -29,6 +29,8 @@ export function App() {
   return <AppView />;
 }
 
+export default App;
+
 export const AppView = () => {
   return (
     <ContentContainer>
@@ -46,5 +48,3 @@ export const AppView = () => {
     </ContentContainer>
   );
 };
-
-export default App;

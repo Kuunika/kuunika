@@ -10,7 +10,7 @@ import { setActivePage } from '../../services/redux/actions/ui';
 
 function Category(props) {
   const [pageTitle, setPageTitle] = useState('');
-  const [breadClumb, setBreadClumb] = useState([]);
+  const [breadCrumb, setbreadCrumb] = useState([]);
 
   const categories = useSelector((state: State) => state.data.categories);
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ function Category(props) {
       ? `${category.categoryTitle}/view/${category.id}`
       : category.categoryTitle;
     link =
-      breadClumb.length > 0
-        ? `/${breadClumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
+      breadCrumb.length > 0
+        ? `/${breadCrumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
         : `/${link.toLowerCase().replace(' ', '-')}`;
 
     props.history.push(link);
@@ -45,36 +45,46 @@ function Category(props) {
     let locationArray = props.location.pathname.split('/');
     locationArray =
       locationArray[1].length === 0 ? [] : [...locationArray].slice(1);
-    setBreadClumb([...locationArray]);
+    setbreadCrumb([...locationArray]);
   }, [props.location.pathname]);
 
   useEffect(() => {
     setData(
-      getSubCategories(categories, [...breadClumb]).map(dt => ({
+      getSubCategories(categories, [...breadCrumb]).map(dt => ({
         title: dt.categoryTitle,
         content: 'example content',
         onClick: () => onClick(dt)
       }))
     );
-  }, [breadClumb, categories]);
+  }, [breadCrumb, categories]);
 
   return (
-    <>
-      <PageHeading>{pageTitle}</PageHeading>
-      {breadClumb.length > 0 && <CategoryBreadCrumb data={breadClumb} />}
-      <Grid container spacing={4}>
-        {data.map(({ title, content, onClick }) => (
-          <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
-            <CategoryCard
-              key={title}
-              title={title}
-              content={content}
-              onClick={onClick}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </>
+    <CategoryView pageTitle={pageTitle} data={data} breadCrumb={breadCrumb} />
   );
 }
 export default Category;
+
+export const CategoryView = ({ pageTitle, breadCrumb, data }: ViewProps) => (
+  <>
+    <PageHeading>{pageTitle}</PageHeading>
+    {breadCrumb.length > 0 && <CategoryBreadCrumb data={breadCrumb} />}
+    <Grid container spacing={4}>
+      {data.map(({ title, content, onClick }) => (
+        <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
+          <CategoryCard
+            key={title}
+            title={title}
+            content={content}
+            onClick={onClick}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  </>
+);
+
+interface ViewProps {
+  pageTitle: string;
+  breadCrumb: Array<string>;
+  data: Array<{ title: string; content: string; onClick: Function }>;
+}

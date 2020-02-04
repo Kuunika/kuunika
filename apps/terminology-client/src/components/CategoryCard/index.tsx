@@ -5,7 +5,7 @@ import Btn from '../Button';
 
 function CategoryCard({ title, content, onClick }: Props) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="category-card">
       <Title>{title}</Title>
       <Content>{content}</Content>
       <Btn onClick={onClick}>VIEW</Btn>

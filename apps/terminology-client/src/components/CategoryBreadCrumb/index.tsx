@@ -4,7 +4,7 @@ import { theme } from '../../config/theme';
 
 function CategoryBreadCrumb({ data }: Props) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="breadcrumb">
       <b>Category: </b>
       {data.map((text, index) => {
         text = text.replace('-', ' ');
