@@ -16,12 +16,7 @@ describe('Base Category', () => {
       ],
       breadCrumb: ['clinical']
     };
-    const { baseElement, getByText, getByTestId, getAllByTestId } = render(
-      <CategoryView {...data} />
-    );
-
-    expect(getByText(data.pageTitle)).toBeTruthy();
-    expect(getByTestId('breadcrumb')).toMatchSnapshot();
-    expect(getAllByTestId('category-card').length).toBe(data.data.length);
+    const { baseElement } = render(<CategoryView {...data} />);
+    expect(baseElement).toMatchSnapshot();
   });
 });

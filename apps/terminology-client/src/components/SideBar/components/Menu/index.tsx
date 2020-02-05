@@ -38,7 +38,7 @@ export default Menu;
 
 export const MenuView = (props: IViewProps) => {
   return (
-    <Wrapper>
+    <Wrapper data-testid="menu-container">
       {props.items.map(item => (
         <MenuItem item={item} key={item.name} />
       ))}

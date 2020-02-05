@@ -31,7 +31,7 @@ export const MenuItemView = ({ item, active, onClick }: Props) => {
           onClick(item);
         }
       }}
-      data-test={`menu${item.name}`}
+      data-testid={`menu-${item.name}`}
     >
       <Wrapper active={active}>
         {/* <Icon>{item.icon}</Icon> */}

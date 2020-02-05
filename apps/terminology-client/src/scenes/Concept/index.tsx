@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { getConcept } from '../../services/redux/actions/data';
-import { State } from '../../services/utils/@types';
+import { State, Concept as IConcept } from '../../services/utils/@types';
 import Btn from '../../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,10 @@ function Concept(props) {
       : state.data.concept['default'];
   });
 
+  const onBack = () => {
+    props.history.goBack();
+  };
+
   useEffect(() => {
     if (
       props.match.params.id &&
@@ -38,18 +42,16 @@ function Concept(props) {
     setBreadClumb([...locationArray]);
   }, [props.match.params]);
 
-  return (
-    <ConceptView data={data} breadCrumb={breadClumb} history={props.history} />
-  );
+  return <ConceptView data={data} breadCrumb={breadClumb} onBack={onBack} />;
 }
 
 export default Concept;
 
-function ConceptView({ data, breadCrumb, history }) {
+export function ConceptView({ data, breadCrumb, onBack }: ViewProps) {
   return (
     <Wrapper>
       <Btn
-        onClick={() => history.goBack()}
+        onClick={onBack}
         theme="default"
         icon={<FontAwesomeIcon icon={faCaretLeft} />}
       >
@@ -62,6 +64,12 @@ function ConceptView({ data, breadCrumb, history }) {
       <Body data={data.descriptions} />
     </Wrapper>
   );
+}
+
+interface ViewProps {
+  data: IConcept;
+  breadCrumb: Array<string>;
+  onBack: Function;
 }
 
 const Wrapper = styled.div`

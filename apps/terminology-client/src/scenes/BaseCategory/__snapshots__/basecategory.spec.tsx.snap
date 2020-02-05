@@ -1,19 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Base Category should render all categories successfully 1`] = `
-<h2
-  class="sc-ifAKCX hKvzgS"
-  data-testid="breadcrumb"
->
-  <b>
-    Category: 
-  </b>
-  <span>
-    <i
-      class="sc-EHOje ihybRz"
+<body>
+  <div>
+    <h1
+      class="sc-gzVnrw jDlAHK"
     >
-      clinical
-    </i>
-  </span>
-</h2>
+      All categories
+    </h1>
+    <h2
+      class="sc-ifAKCX hKvzgS"
+      data-testid="breadcrumb"
+    >
+      <b>
+        Category: 
+      </b>
+      <span>
+        <i
+          class="sc-EHOje ihybRz"
+        >
+          clinical
+        </i>
+      </span>
+    </h2>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-4"
+      >
+        <div
+          class="sc-bwzfXH kDFgrS"
+          data-testid="category-card"
+        >
+          <div
+            class="sc-htpNat bKNYPk"
+          >
+            Terms
+          </div>
+          <p
+            class="sc-bxivhb jcWvLS"
+          >
+            test
+          </p>
+          <button
+            class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-104 MuiButton-contained"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              VIEW
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 `;

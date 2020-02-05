@@ -55,7 +55,12 @@ function Concepts(props) {
 
 export default Concepts;
 
-function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
+export function ConceptsView({
+  data,
+  breadCrumb,
+  onChangeSearch,
+  filter
+}: ViewProps) {
   return (
     <Wrapper>
       <TableTitleContainer>
