@@ -1,15 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import MenuItem from './components/MenuItem';
-import {
-  faStethoscope,
-  faFirstAid,
-  faPills,
-  faSyringe,
-  faDatabase,
-  faUserShield
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActivePage } from 'apps/terminology-client/src/services/redux/actions/ui';
 import { State } from 'apps/terminology-client/src/services/utils/@types';
