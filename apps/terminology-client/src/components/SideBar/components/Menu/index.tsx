@@ -25,7 +25,7 @@ function Menu() {
 
   const MenuData = categories
     ? categories.map(category => ({
-        name: category.categoryTitle.toLowerCase(),
+        name: category.categoryTitle.toLowerCase().replace(' ', ''),
         displayName: category.categoryTitle,
         link: `/${category.categoryTitle.replace(' ', '-').toLowerCase()}`
       }))

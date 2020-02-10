@@ -66,7 +66,7 @@ export default Category;
 
 export const CategoryView = ({ pageTitle, breadCrumb, data }: ViewProps) => (
   <>
-    <PageHeading>{pageTitle}</PageHeading>
+    <PageHeading data-testid="page-title">{pageTitle}</PageHeading>
     {breadCrumb.length > 0 && <CategoryBreadCrumb data={breadCrumb} />}
     <Grid container spacing={4}>
       {data.map(({ title, content, onClick }) => (
