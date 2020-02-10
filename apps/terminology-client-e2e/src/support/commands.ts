@@ -11,11 +11,21 @@ import API from '../../../terminology-client/src/services/api'; // eslint-disabl
 declare namespace Cypress {
   interface Chainable<Subject> {
     getMenu(): any;
+    getConcepts(id: string): any;
+    getConcept(id: string, conceptId: string): any;
   }
 }
 
 Cypress.Commands.add('getMenu', () => {
   return API.getCategories();
+});
+
+Cypress.Commands.add('getConcepts', id => {
+  return API.getCategoryData(id);
+});
+
+Cypress.Commands.add('getConcept', (id, conceptId) => {
+  return API.getConcept(id, conceptId);
 });
 //
 // -- This is a child command --

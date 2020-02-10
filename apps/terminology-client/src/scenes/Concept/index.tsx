@@ -49,7 +49,7 @@ export default Concept;
 
 export function ConceptView({ data, breadCrumb, onBack }: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="concept-description">
       <Btn
         onClick={onBack}
         theme="default"

@@ -62,7 +62,7 @@ export function ConceptsView({
   filter
 }: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="concepts-table">
       <TableTitleContainer>
         <CategoryBreadCrumb data={breadCrumb} />
         <InputGroup>

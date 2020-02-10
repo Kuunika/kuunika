@@ -5,6 +5,7 @@ exports[`Concepts Page should render concepts page 1`] = `
   <div>
     <div
       class="sc-gZMcBi kpgBpM"
+      data-testid="concepts-table"
     >
       <div
         class="sc-gqjmRU btOyEa"
