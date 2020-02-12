@@ -7,6 +7,7 @@ import { setActivePage } from '../../../../../services/redux/actions/ui';
 
 function MenuItem({ item }: Props) {
   const activePage = useSelector((state: State) => state.ui.activePage);
+
   const dispatch = useDispatch();
   const onClick = useCallback(
     item => {

@@ -7,6 +7,8 @@ import { getCategoryData } from '../../services/redux/actions/data';
 import { State, CategoryData } from '../../services/utils/@types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import ContentLoader from 'react-content-loader';
+import { CircularProgress } from '@material-ui/core';
 
 function Concepts(props) {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ function Concepts(props) {
       ? state.data.categoryData[props.match.params.id]
       : state.data.categoryData['default'];
   });
+
+  const loading = useSelector((state: State) => state.loading.getCategoryData);
 
   useEffect(() => {
     if (props.match.params.search) setSearch(props.match.params.search);
@@ -53,17 +57,23 @@ function Concepts(props) {
       breadCrumb={breadClumb}
       onChangeSearch={onChangeSearch}
       filter={search}
+      loading={loading}
     />
   );
 }
 
 export default Concepts;
-
+export const LoadingConcepts = () => (
+  <LoaderContainer>
+    <CircularProgress />
+  </LoaderContainer>
+);
 export function ConceptsView({
   data,
   breadCrumb,
   onChangeSearch,
-  filter
+  filter,
+  loading
 }: ViewProps) {
   return (
     <Wrapper data-testid="concepts-table">
@@ -89,8 +99,11 @@ export function ConceptsView({
           </Addon>
         </InputGroup>
       </TableTitleContainer>
-
-      <Table headings={data.sourceHeadings} data={data.formatedData} />
+      {loading ? (
+        <LoadingConcepts />
+      ) : (
+        <Table headings={data.sourceHeadings} data={data.formatedData} />
+      )}
     </Wrapper>
   );
 }
@@ -100,6 +113,7 @@ interface ViewProps {
   breadCrumb: Array<string>;
   onChangeSearch: Function;
   filter: string;
+  loading: boolean;
 }
 const Wrapper = styled.div`
   background: #f4f4f4;
@@ -147,4 +161,11 @@ const Addon = styled.div`
   border-radius: 0rem 1.5rem 1.5rem 0rem;
   color: gray;
   cursor: pointer;
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  min-height: 40rem;
+  align-items: center;
+  justify-content: center;
 `;

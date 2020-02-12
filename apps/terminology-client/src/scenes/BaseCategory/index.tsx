@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
 import CategoryCard from '../../components/CategoryCard';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { PageHeading } from '../../components/PageHeading/PageHeading';
@@ -7,12 +7,15 @@ import { State, Category as ICategory } from '../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSubCategories } from '../../services/utils/helpers';
 import { setActivePage } from '../../services/redux/actions/ui';
+import styled from 'styled-components';
 
 function Category(props) {
   const [pageTitle, setPageTitle] = useState('');
   const [breadCrumb, setbreadCrumb] = useState([]);
 
   const categories = useSelector((state: State) => state.data.categories);
+
+  const loading = useSelector((state: State) => state.loading.getCategories);
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
@@ -59,27 +62,47 @@ function Category(props) {
   }, [breadCrumb, categories]);
 
   return (
-    <CategoryView pageTitle={pageTitle} data={data} breadCrumb={breadCrumb} />
+    <CategoryView
+      pageTitle={pageTitle}
+      data={data}
+      breadCrumb={breadCrumb}
+      loading={loading}
+    />
   );
 }
 export default Category;
 
-export const CategoryView = ({ pageTitle, breadCrumb, data }: ViewProps) => (
+export const LoadingCategories = () => (
+  <LoaderContainer>
+    <CircularProgress />
+  </LoaderContainer>
+);
+
+export const CategoryView = ({
+  pageTitle,
+  breadCrumb,
+  data,
+  loading
+}: ViewProps) => (
   <>
     <PageHeading data-testid="page-title">{pageTitle}</PageHeading>
     {breadCrumb.length > 0 && <CategoryBreadCrumb data={breadCrumb} />}
-    <Grid container spacing={4}>
-      {data.map(({ title, content, onClick }) => (
-        <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
-          <CategoryCard
-            key={title}
-            title={title}
-            content={content}
-            onClick={onClick}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    {loading ? (
+      <LoadingCategories />
+    ) : (
+      <Grid container spacing={4}>
+        {data.map(({ title, content, onClick }) => (
+          <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
+            <CategoryCard
+              key={title}
+              title={title}
+              content={content}
+              onClick={onClick}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    )}
   </>
 );
 
@@ -87,4 +110,12 @@ interface ViewProps {
   pageTitle: string;
   breadCrumb: Array<string>;
   data: Array<{ title: string; content: string; onClick: Function }>;
+  loading: boolean;
 }
+
+const LoaderContainer = styled.div`
+  display: flex;
+  min-height: 20rem;
+  align-items: center;
+  justify-content: center;
+`;

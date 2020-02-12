@@ -7,13 +7,19 @@ import {
   ISearchCategory,
   ISearch
 } from 'apps/terminology-client/src/services/utils/@types';
+import { LinearProgress } from '@material-ui/core';
 
 function SearchResults(props: Props) {
-  const searchResults = useSelector((state: State) => state.data.search);
+  const searchResults: ISearch = useSelector(
+    (state: State) => state.data.search
+  );
+
+  const loading = useSelector((state: State) => state.loading.searchConcept);
+
   return (
     <>
-      {props.open && searchResults.searchCategories.length > 0 && (
-        <SearchResultsView data={searchResults} />
+      {props.open && searchResults.searchTerm.length > 0 && (
+        <SearchResultsView data={searchResults} loading={loading} />
       )}
     </>
   );
@@ -21,9 +27,17 @@ function SearchResults(props: Props) {
 
 export default SearchResults;
 
-export function SearchResultsView({ data }: ViewProps) {
+export function SearchResultsView({ data, loading }: ViewProps) {
   return (
     <Wrapper>
+      {loading && (
+        <div>
+          <LinearProgress />
+        </div>
+      )}
+      {data.searchCategories.length == 0 && !loading && (
+        <div>No results for search</div>
+      )}
       {data.searchCategories.map(result => (
         <SearchResultItem
           key={result.sourceId}
@@ -41,10 +55,12 @@ interface Props {
 
 interface ViewProps {
   data: ISearch;
+  loading: boolean;
 }
 
 const Wrapper = styled.div`
   padding: 1rem;
+  min-width: 40rem;
   position: absolute;
   top: 110%;
   text-align: center;

@@ -18,7 +18,7 @@ function SearchResultItem({
   const dispatch = useDispatch();
 
   const onClick = () => {
-    const link = `/${breadcrumbCategory}/view/${sourceId}/${encodeURI(
+    const link = `/${breadcrumbCategory}/view/search/${sourceId}/${encodeURI(
       searchTerm
     )}`;
     history.push(link);

@@ -59,7 +59,8 @@ export default (
         ...state,
         search: {
           searchTerm: action.payload,
-          searchCategories: []
+          searchCategories:
+            action.payload.length == 0 ? [] : state.search.searchCategories
         }
       };
     default:

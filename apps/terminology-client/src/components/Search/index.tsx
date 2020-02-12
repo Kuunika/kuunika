@@ -84,9 +84,7 @@ export function SearchView(props: ViewProps) {
           </Addon>
         </InputGroup>
 
-        <SearchResults
-          open={props.searchOpen && props.searchValue.length > 0}
-        />
+        <SearchResults open={props.searchOpen} />
       </Wrapper>
     </ClickAwayListener>
   );
