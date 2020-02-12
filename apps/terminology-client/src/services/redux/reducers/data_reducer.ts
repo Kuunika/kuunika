@@ -54,6 +54,14 @@ export default (
         ...state,
         search: action.payload.data
       };
+    case actions.setSearchValue:
+      return {
+        ...state,
+        search: {
+          searchTerm: action.payload,
+          searchCategories: []
+        }
+      };
     default:
       return state;
   }

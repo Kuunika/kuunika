@@ -21,8 +21,17 @@ export const getConcept = (id: string, conceptId: string) => ({
 });
 
 export const searchConcept = (value: string) => {
+  return value.length > 0
+    ? {
+        type: actions.searchConcept,
+        payload: API.searchConcept(value)
+      }
+    : setSearchValue(value);
+};
+
+export const setSearchValue = (value: string) => {
   return {
-    type: actions.searchConcept,
-    payload: value.length > 0 ? API.searchConcept(value) : null
+    type: actions.setSearchValue,
+    payload: value
   };
 };

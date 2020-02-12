@@ -13,23 +13,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SearchResults from './components/SearchResults';
-import { searchConcept } from '../../services/redux/actions/data';
+import {
+  searchConcept,
+  setSearchValue
+} from '../../services/redux/actions/data';
 import { setSearchResultsState } from '../../services/redux/actions/ui';
 import { debounce } from 'lodash';
 import { State } from '../../services/utils/@types';
 
 function Search() {
-  const [searchValue, setSearchValue] = useState('');
-
   const open = useSelector((state: State) => state.ui.searchResults);
+
+  const searchValue = useSelector(
+    (state: State) => state.data.search.searchTerm
+  );
 
   const dispatch = useDispatch();
 
   const handleClickAway = () => dispatch(setSearchResultsState(false));
   const onFocus = () => dispatch(setSearchResultsState(true));
 
-  const onChange = value => {
-    setSearchValue(value);
+  const onChange = (value = '') => {
+    dispatch(setSearchValue(value));
     search(value);
   };
   const search = useRef(
@@ -66,7 +71,9 @@ export function SearchView(props: ViewProps) {
             {props.searchOpen && props.searchValue.length > 0 ? (
               <FontAwesomeIcon
                 icon={faTimes}
-                onClick={props.handleClickAway as MouseEventHandler<any>}
+                onClick={e => {
+                  props.onChange(), props.handleClickAway(e as MouseEvent<any>);
+                }}
               />
             ) : (
               <FontAwesomeIcon
