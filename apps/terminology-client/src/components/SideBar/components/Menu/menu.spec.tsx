@@ -30,7 +30,7 @@ describe('Menu', () => {
     const { baseElement } = render(
       <Provider store={Store}>
         <BrowserRouter>
-          <MenuView {...data} />
+          <MenuView {...data} loading={false} />
         </BrowserRouter>
       </Provider>
     );

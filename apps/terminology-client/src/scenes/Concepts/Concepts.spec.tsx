@@ -28,7 +28,7 @@ describe('Concepts Page', () => {
     };
     const wrapper = render(
       <BrowserRouter>
-        <ConceptsView {...data} />
+        <ConceptsView {...data} loading={false} />
       </BrowserRouter>
     );
 

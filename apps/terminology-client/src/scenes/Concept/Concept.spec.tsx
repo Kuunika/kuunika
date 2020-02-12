@@ -22,7 +22,7 @@ describe('Concept', () => {
       } as IConcept,
       breadCrumb: ['clinical', 'ICD10']
     };
-    const { baseElement } = render(<ConceptView {...data} />);
+    const { baseElement } = render(<ConceptView {...data} loading={false} />);
     expect(baseElement).toMatchSnapshot();
   });
 });

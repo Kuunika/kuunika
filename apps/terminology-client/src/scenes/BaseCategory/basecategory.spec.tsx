@@ -16,7 +16,7 @@ describe('Base Category', () => {
       ],
       breadCrumb: ['clinical']
     };
-    const { baseElement } = render(<CategoryView {...data} />);
+    const { baseElement } = render(<CategoryView {...data} loading={false} />);
     expect(baseElement).toMatchSnapshot();
   });
 });
