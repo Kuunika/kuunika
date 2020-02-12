@@ -4,6 +4,8 @@ import Btn from '../../Button';
 import { theme } from '../../../config/theme';
 import { ISearchCategory } from 'apps/terminology-client/src/services/utils/@types';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSearchResultsState } from 'apps/terminology-client/src/services/redux/actions/ui';
 
 function SearchResultItem({
   breadcrumbCategory,
@@ -12,9 +14,13 @@ function SearchResultItem({
   searchTerm
 }: ISearchCategory) {
   const history = useHistory();
+
+  const dispatch = useDispatch();
+
   const onClick = () => {
     const link = `/${breadcrumbCategory}/view/${sourceId}/${searchTerm}`;
     history.push(link);
+    dispatch(setSearchResultsState(false));
   };
   return (
     <Wrapper>

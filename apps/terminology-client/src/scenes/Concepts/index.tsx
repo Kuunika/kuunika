@@ -21,6 +21,10 @@ function Concepts(props) {
   });
 
   useEffect(() => {
+    if (props.match.params.search) setSearch(props.match.params.search);
+  }, [props.match.params]);
+
+  useEffect(() => {
     const dt = data.results.filter(t => {
       return JSON.stringify(t)
         .toLowerCase()

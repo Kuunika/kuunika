@@ -14,16 +14,19 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SearchResults from './components/SearchResults';
 import { searchConcept } from '../../services/redux/actions/data';
+import { setSearchResultsState } from '../../services/redux/actions/ui';
 import { debounce } from 'lodash';
+import { State } from '../../services/utils/@types';
 
 function Search() {
-  const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  const open = useSelector((state: State) => state.ui.searchResults);
 
   const dispatch = useDispatch();
 
-  const handleClickAway = () => setOpen(false);
-  const onFocus = () => setOpen(true);
+  const handleClickAway = () => dispatch(setSearchResultsState(false));
+  const onFocus = () => dispatch(setSearchResultsState(true));
 
   const onChange = value => {
     setSearchValue(value);

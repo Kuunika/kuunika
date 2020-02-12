@@ -1,5 +1,6 @@
 export interface UIState {
   activePage: string;
+  searchResults: Boolean;
 }
 
 export interface Category {
