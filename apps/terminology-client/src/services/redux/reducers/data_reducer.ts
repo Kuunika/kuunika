@@ -16,7 +16,11 @@ const initialState = {
       descriptions: [],
       breadcrumb: ''
     }
-  } as Object
+  } as Object,
+  search: {
+    searchTerm: '',
+    searchCategories: []
+  }
 } as IData;
 
 export default (
@@ -44,6 +48,11 @@ export default (
           ...state.concept,
           [action.meta]: action.payload.data
         }
+      };
+    case actions.searchConcept + '_FULFILLED':
+      return {
+        ...state,
+        search: action.payload.data
       };
     default:
       return state;

@@ -14,6 +14,16 @@ export interface CategoryData {
   formatedData?: Array<any>;
 }
 
+export interface ISearchCategory {
+  breadcrumbCategory: string;
+  numberOfResults: number | string;
+  sourceId: string;
+  searchTerm?: string;
+}
+export interface ISearch {
+  searchTerm: string;
+  searchCategories: Array<ISearchCategory>;
+}
 export interface Concept {
   id: number | string | null;
   headings: Array<{ title: string; value: string }>;
@@ -24,6 +34,7 @@ export interface IData {
   categories: Array<Category>;
   categoryData: { [key: string]: CategoryData };
   concept: { [key: string]: Concept };
+  search: ISearch;
 }
 
 export interface State {

@@ -13,5 +13,9 @@ export default {
   getConcept: (id: string, conceptId: string) => {
     const url = `${API_ENDPOINT}/sources/${id}/${conceptId}`;
     return axios.get(url);
+  },
+  searchConcept: (value: string) => {
+    const url = `${API_ENDPOINT}/search/${value}`;
+    return axios.get(url);
   }
 };

@@ -3,5 +3,7 @@ export default {
 
   getCategories: 'GET_CATEGORIES',
   getCategoryData: 'GET_CATEGORY_DATA',
-  getConcept: 'GET_CONCEPT'
+  getConcept: 'GET_CONCEPT',
+
+  searchConcept: 'SEARCH_CONCEPT'
 };

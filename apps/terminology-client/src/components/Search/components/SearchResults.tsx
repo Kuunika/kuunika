@@ -1,27 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchResultItem from './SearchResultItem';
+import { useSelector } from 'react-redux';
+import {
+  State,
+  ISearchCategory,
+  ISearch
+} from 'apps/terminology-client/src/services/utils/@types';
 
 function SearchResults(props: Props) {
-  return <>{props.open && <SearchResultsView />}</>;
+  const searchResults = useSelector((state: State) => state.data.search);
+  return (
+    <>
+      {props.open && searchResults.searchCategories.length > 0 && (
+        <SearchResultsView data={searchResults} />
+      )}
+    </>
+  );
 }
 
 export default SearchResults;
 
-export function SearchResultsView() {
+export function SearchResultsView({ data }: ViewProps) {
   return (
     <Wrapper>
-      <SearchResultItem />
-      <SearchResultItem />
-      <SearchResultItem />
-      <SearchResultItem />
-      <SearchResultItem />
+      {data.searchCategories.map(result => (
+        <SearchResultItem
+          key={result.sourceId}
+          {...result}
+          searchTerm={data.searchTerm}
+        />
+      ))}
     </Wrapper>
   );
 }
 
 interface Props {
   open: boolean;
+}
+
+interface ViewProps {
+  data: ISearch;
 }
 
 const Wrapper = styled.div`

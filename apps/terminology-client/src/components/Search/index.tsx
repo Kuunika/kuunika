@@ -2,27 +2,46 @@ import React, {
   useState,
   MouseEvent,
   MouseEventHandler,
-  FocusEventHandler
+  FocusEventHandler,
+  useEffect,
+  KeyboardEventHandler,
+  useRef
 } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SearchResults from './components/SearchResults';
+import { searchConcept } from '../../services/redux/actions/data';
+import { debounce } from 'lodash';
 
 function Search() {
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+
+  const dispatch = useDispatch();
+
   const handleClickAway = () => setOpen(false);
   const onFocus = () => setOpen(true);
+
+  const onChange = value => {
+    setSearchValue(value);
+    search(value);
+  };
+  const search = useRef(
+    debounce(value => {
+      dispatch(searchConcept(value));
+    }, 800)
+  ).current;
 
   return (
     <SearchView
       searchOpen={open}
       handleClickAway={handleClickAway}
       onFocus={onFocus}
-      search={search}
-      onChange={setSearch}
+      searchValue={searchValue}
+      onChange={onChange}
     />
   );
 }
@@ -38,10 +57,10 @@ export function SearchView(props: ViewProps) {
             placeholder="Search"
             onFocus={props.onFocus as FocusEventHandler<any>}
             onChange={e => props.onChange(e.target.value)}
-            value={props.search}
+            value={props.searchValue}
           ></Input>
           <Addon>
-            {props.searchOpen && props.search.length > 0 ? (
+            {props.searchOpen && props.searchValue.length > 0 ? (
               <FontAwesomeIcon
                 icon={faTimes}
                 onClick={props.handleClickAway as MouseEventHandler<any>}
@@ -55,7 +74,9 @@ export function SearchView(props: ViewProps) {
           </Addon>
         </InputGroup>
 
-        <SearchResults open={props.searchOpen && props.search.length > 0} />
+        <SearchResults
+          open={props.searchOpen && props.searchValue.length > 0}
+        />
       </Wrapper>
     </ClickAwayListener>
   );
@@ -65,7 +86,7 @@ interface ViewProps {
   searchOpen: boolean;
   handleClickAway: (event: MouseEvent<Document>) => void;
   onFocus: Function;
-  search: string;
+  searchValue: string;
   onChange: Function;
 }
 

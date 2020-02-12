@@ -46,12 +46,6 @@ describe('Shows Concepts Table', () => {
             .get('span')
             .contains(conceptData.headings[index].value);
         });
-
-        // cy.get('[data-testid=concepts-table] table thead tr')
-        //   .children()
-        //   .each((element, index) => {
-        //     cy.wrap(element).contains(tableData.sourceHeadings[index]);
-        //   });
       });
     });
   });

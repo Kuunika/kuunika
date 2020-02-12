@@ -2,15 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import Btn from '../../Button';
 import { theme } from '../../../config/theme';
+import { ISearchCategory } from 'apps/terminology-client/src/services/utils/@types';
+import { useHistory } from 'react-router-dom';
 
-function SearchResultItem() {
+function SearchResultItem({
+  breadcrumbCategory,
+  numberOfResults,
+  sourceId,
+  searchTerm
+}: ISearchCategory) {
+  const history = useHistory();
+  const onClick = () => {
+    const link = `/${breadcrumbCategory}/view/${sourceId}/${searchTerm}`;
+    history.push(link);
+  };
   return (
     <Wrapper>
       <Category>
-        Category: <i>Clinical/Terms/ICD10</i>
-        <p>14 records found</p>
+        Category: <i>{breadcrumbCategory}</i>
+        <p>{numberOfResults} records found</p>
       </Category>
-      <Btn style={{ width: '8rem', height: '2.5rem' }}> View </Btn>
+      <Btn style={{ width: '8rem', height: '2.5rem' }} onClick={onClick}>
+        {' '}
+        View{' '}
+      </Btn>
     </Wrapper>
   );
 }

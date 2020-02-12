@@ -19,3 +19,10 @@ export const getConcept = (id: string, conceptId: string) => ({
   payload: API.getConcept(id, conceptId),
   meta: `${id}${conceptId}`
 });
+
+export const searchConcept = (value: string) => {
+  return {
+    type: actions.searchConcept,
+    payload: value.length > 0 ? API.searchConcept(value) : null
+  };
+};
