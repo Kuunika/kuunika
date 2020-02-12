@@ -38,9 +38,14 @@ export interface IData {
   search: ISearch;
 }
 
+export interface IError {
+  error: Array<string> | string;
+  [key: string]: Array<string> | string;
+}
+
 export interface State {
   ui: UIState;
   data: IData;
-  errors: any;
+  errors: IError;
   loading: any;
 }

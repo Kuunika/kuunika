@@ -104,6 +104,7 @@ const Wrapper = styled.div`
   justify-content: center;
   position: relative;
   align-items: center;
+  margin-bottom: 1rem;
 `;
 
 const InputGroup = styled.div`
