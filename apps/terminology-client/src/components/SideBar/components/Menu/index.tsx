@@ -48,7 +48,7 @@ export const MenuLoading = () => (
 export const MenuView = (props: IViewProps) => {
   return (
     <Wrapper data-testid="menu-container">
-      {props.loading ? (
+      {props.loading || props.items.length == 0 ? (
         <MenuLoading />
       ) : (
         props.items.map(item => <MenuItem item={item} key={item.name} />)

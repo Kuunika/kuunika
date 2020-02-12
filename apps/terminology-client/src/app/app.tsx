@@ -12,6 +12,7 @@ import Search from '../components/Search';
 
 import { getCategories } from '../services/redux/actions/data';
 import Notification from '../components/Notification';
+import Error from '../components/Error';
 
 const ContentContainer = styled.div`
   padding: 30px;
@@ -43,7 +44,8 @@ export const AppView = () => {
         </Hidden>
         <Grid item xs={12} sm={12} md={10} lg={10}>
           <Search />
-          <Notification />
+          {/* <Notification /> */}
+          <Error />
           <Page />
         </Grid>
       </Grid>

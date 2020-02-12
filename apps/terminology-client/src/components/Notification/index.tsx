@@ -5,7 +5,7 @@ import { State } from '../../services/utils/@types';
 import { useSelector } from 'react-redux';
 
 function Notification() {
-  const error = useSelector((state: State) => state.errors.error);
+  const error = useSelector((state: State) => state.errors.error.message);
   return (
     <>
       {error.length > 0 && (

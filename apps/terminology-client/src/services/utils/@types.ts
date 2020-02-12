@@ -39,13 +39,17 @@ export interface IData {
 }
 
 export interface IError {
-  error: Array<string> | string;
-  [key: string]: Array<string> | string;
+  status: Number;
+  message: string;
+}
+export interface IErrors {
+  error: IError;
+  [key: string]: IError | Array<string> | string;
 }
 
 export interface State {
   ui: UIState;
   data: IData;
-  errors: IError;
+  errors: IErrors;
   loading: any;
 }

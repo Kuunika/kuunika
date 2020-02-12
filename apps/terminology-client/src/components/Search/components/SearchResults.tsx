@@ -15,11 +15,15 @@ function SearchResults(props: Props) {
   );
 
   const loading = useSelector((state: State) => state.loading.searchConcept);
-
+  const error = useSelector((state: State) => state.errors.searchConcept || []);
   return (
     <>
       {props.open && searchResults.searchTerm.length > 0 && (
-        <SearchResultsView data={searchResults} loading={loading} />
+        <SearchResultsView
+          data={searchResults}
+          loading={loading}
+          error={error}
+        />
       )}
     </>
   );
@@ -27,7 +31,7 @@ function SearchResults(props: Props) {
 
 export default SearchResults;
 
-export function SearchResultsView({ data, loading }: ViewProps) {
+export function SearchResultsView({ data, loading, error }: ViewProps) {
   return (
     <Wrapper>
       {loading && (
@@ -38,6 +42,7 @@ export function SearchResultsView({ data, loading }: ViewProps) {
       {data.searchCategories.length == 0 && !loading && (
         <div>No results for search</div>
       )}
+      {error.length > 0 && <div>{error[0]}</div>}
       {data.searchCategories.map(result => (
         <SearchResultItem
           key={result.sourceId}
@@ -56,6 +61,7 @@ interface Props {
 interface ViewProps {
   data: ISearch;
   loading: boolean;
+  error: Array<string>;
 }
 
 const Wrapper = styled.div`
