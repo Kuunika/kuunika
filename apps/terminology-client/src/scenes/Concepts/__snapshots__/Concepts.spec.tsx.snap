@@ -4,11 +4,11 @@ exports[`Concepts Page should render concepts page 1`] = `
 <body>
   <div>
     <div
-      class="sc-gZMcBi kpgBpM"
+      class="sc-gqjmRU KqEos"
       data-testid="concepts-table"
     >
       <div
-        class="sc-gqjmRU btOyEa"
+        class="sc-VigVT kebjCN"
       >
         <h2
           class="sc-bdVaJa fWJwsq"
@@ -36,15 +36,15 @@ exports[`Concepts Page should render concepts page 1`] = `
           </span>
         </h2>
         <div
-          class="sc-VigVT ikPxgr"
+          class="sc-jTzLTM bxVmVK"
         >
           <input
-            class="sc-jTzLTM ldoNex"
+            class="sc-fjdhpX dnLDnU"
             placeholder="Search"
             value=""
           />
           <div
-            class="sc-fjdhpX fOMZpx"
+            class="sc-jzJRlG gwYrLW"
           >
             <svg
               aria-hidden="true"
@@ -63,6 +63,33 @@ exports[`Concepts Page should render concepts page 1`] = `
             </svg>
           </div>
         </div>
+      </div>
+      <div
+        class="sc-kAzzGY LlbHt"
+      >
+        <a
+          download="Terminologies_Fri Feb 14 2020.csv"
+          href="data:text/csv;charset=utf-8,﻿\\"id\\",\\"name\\"
+\\"1\\",\\"name\\"
+\\"2\\",\\"name2\\"
+\\"3\\",\\"name3\\""
+          target="_self"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-1 MuiButton-contained"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Download
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </a>
       </div>
       <div>
         <table
