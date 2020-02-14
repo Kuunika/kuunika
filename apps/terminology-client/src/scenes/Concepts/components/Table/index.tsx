@@ -14,6 +14,7 @@ function Table({ headings, data }: Props) {
   });
 
   const history = useHistory();
+  const params = useParams();
 
   const [formatedData, setFormatedData] = useState([]);
   const count = 10;
@@ -37,7 +38,10 @@ function Table({ headings, data }: Props) {
   }, [page, data]);
 
   const onConceptClick = conceptId => {
-    history.push(`${history.location.pathname}/${conceptId}`);
+    const base = history.location.pathname;
+    console.log(params);
+    const basePath = `${base.slice(0, base.indexOf('view'))}view`;
+    history.push(`${basePath}/${params['id']}/${conceptId}`);
   };
   const onChangePage = (action: 'next' | 'prev' | 'first' | 'last') => {
     switch (action) {

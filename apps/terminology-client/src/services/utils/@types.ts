@@ -43,8 +43,7 @@ export interface IError {
   message: string;
 }
 export interface IErrors {
-  error: IError;
-  [key: string]: IError | Array<string> | string;
+  [key: string]: IError | any;
 }
 
 export interface State {

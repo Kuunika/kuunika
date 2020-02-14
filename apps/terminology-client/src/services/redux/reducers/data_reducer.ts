@@ -38,7 +38,7 @@ export default (
         ...state,
         categoryData: {
           ...state.categoryData,
-          [action.meta]: action.payload.data
+          [action.meta.id]: action.payload.data
         }
       };
     case actions.getConcept + '_FULFILLED':
@@ -46,7 +46,7 @@ export default (
         ...state,
         concept: {
           ...state.concept,
-          [action.meta]: action.payload.data
+          [`${action.meta.id}${action.meta.conceptId}`]: action.payload.data
         }
       };
     case actions.searchConcept + '_FULFILLED':

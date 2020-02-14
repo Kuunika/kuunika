@@ -18,43 +18,34 @@ export default (
     case `${actionGroup}_PENDING`:
       return {
         ...state,
-        [`${formattedActionGroup}`]: []
+        [`${formattedActionGroup}`]: { status: 200, message: '' },
+        meta: {
+          ...state.meta,
+          [`${formattedActionGroup}`]: action.meta
+        }
       };
     case `${actionGroup}_REJECTED`:
-      return actionGroup == actions.searchConcept
-        ? {
-            ...state,
-            [formattedActionGroup]:
-              action.payload.response.status == 404
-                ? ['Not Found']
-                : ['Search Service Not Available']
-          }
-        : {
-            ...state,
-            [formattedActionGroup]: ['There was a general error'],
-            error: {
-              status: action.payload.response.status,
-              message:
-                action.payload.response.status == 404
-                  ? 'Not Found'
-                  : 'There was an error while fetching data.'
-            }
-          };
-    case `${actionGroup}_FULFILLED`:
-      return actionGroup == actions.searchConcept
-        ? {
-            ...state,
-            [formattedActionGroup]: []
-          }
-        : {
-            ...state,
-            [formattedActionGroup]: [],
-            error: {
-              status: 200,
-              message: ''
-            }
-          };
+      return {
+        ...state,
+        [formattedActionGroup]: {
+          status: action.payload.response.status,
+          message:
+            action.payload.response.status == 404
+              ? 'Not Found'
+              : 'There was an error while fetching data.'
+        }
+      };
 
+    case `${actionGroup}_FULFILLED`:
+      return {
+        ...state,
+        [formattedActionGroup]: { status: 200, message: '' }
+      };
+    case `${actions.resetError}`:
+      return {
+        ...state,
+        [action.payload]: { status: 200, message: '' }
+      };
     default:
       return state;
   }

@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ContentLoader from 'react-content-loader';
 import { CircularProgress } from '@material-ui/core';
+import Btn from '../../components/Button';
+import { CSVLink } from 'react-csv';
 
 function Concepts(props) {
   const dispatch = useDispatch();
@@ -99,6 +101,14 @@ export function ConceptsView({
           </Addon>
         </InputGroup>
       </TableTitleContainer>
+      <DownloadContainer>
+        <CSVLink
+          data={data.formatedData}
+          filename={`Terminologies_${new Date().toDateString()}.csv`}
+        >
+          <Btn theme="success">Download</Btn>
+        </CSVLink>
+      </DownloadContainer>
       {loading ? (
         <LoadingConcepts />
       ) : (
@@ -168,4 +178,8 @@ const LoaderContainer = styled.div`
   min-height: 40rem;
   align-items: center;
   justify-content: center;
+`;
+
+const DownloadContainer = styled.div`
+  text-align: right;
 `;
