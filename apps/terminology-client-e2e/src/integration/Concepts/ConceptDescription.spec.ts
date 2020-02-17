@@ -8,7 +8,6 @@ import {
 const config = require('../../support/config.json');
 
 describe('Shows Concepts Table', () => {
-  console.log(config);
   const FRONTEND_URL = config.FRONTEND_URL;
   before(() => cy.visit('/'));
 

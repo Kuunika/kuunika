@@ -4,7 +4,6 @@ import { Category } from '../../../../terminology-client/src/services/utils/@typ
 const config = require('../../support/config.json');
 
 describe('terminology-client', () => {
-  console.log(config);
   const FRONTEND_URL = config.FRONTEND_URL;
   before(() => cy.visit('/'));
 

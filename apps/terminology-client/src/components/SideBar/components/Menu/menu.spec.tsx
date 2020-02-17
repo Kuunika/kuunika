@@ -13,17 +13,20 @@ describe('Menu', () => {
         {
           name: 'clinical',
           displayName: 'Clinical',
-          link: './clinical'
+          link: './clinical',
+          icon: ['fas fa-ambulance']
         },
         {
           name: 'Menu2',
           displayName: 'Menu2',
-          link: './menu2'
+          link: './menu2',
+          icon: ['fas fa-user-md']
         },
         {
           name: 'Menu3',
           displayName: 'Menu3',
-          link: './menu3'
+          link: './menu3',
+          icon: ['fas fa-pills']
         }
       ]
     };

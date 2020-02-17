@@ -53,9 +53,10 @@ function Category(props) {
 
   useEffect(() => {
     setData(
-      getSubCategories(categories, [...breadCrumb]).map(dt => ({
+      getSubCategories(categories, [...breadCrumb]).map((dt: ICategory) => ({
         title: dt.categoryTitle,
-        content: 'example content',
+        content: dt.description,
+        icons: dt.icons,
         onClick: () => onClick(dt)
       }))
     );
@@ -91,12 +92,13 @@ export const CategoryView = ({
       <LoadingCategories />
     ) : (
       <Grid container spacing={4}>
-        {data.map(({ title, content, onClick }) => (
+        {data.map(({ title, content, onClick, icons }) => (
           <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
             <CategoryCard
               key={title}
               title={title}
               content={content}
+              icons={icons}
               onClick={onClick}
             />
           </Grid>
@@ -109,7 +111,12 @@ export const CategoryView = ({
 interface ViewProps {
   pageTitle: string;
   breadCrumb: Array<string>;
-  data: Array<{ title: string; content: string; onClick: Function }>;
+  data: Array<{
+    title: string;
+    content: string;
+    onClick: Function;
+    icons: Array<string>;
+  }>;
   loading: boolean;
 }
 

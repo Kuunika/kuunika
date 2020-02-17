@@ -39,7 +39,6 @@ function Table({ headings, data }: Props) {
 
   const onConceptClick = conceptId => {
     const base = history.location.pathname;
-    console.log(params);
     const basePath = `${base.slice(0, base.indexOf('view'))}view`;
     history.push(`${basePath}/${params['id']}/${conceptId}`);
   };

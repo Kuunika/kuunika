@@ -20,3 +20,8 @@ export const getSubCategories = (
     targetCategories.splice(1)
   );
 };
+
+export const ellipses = (value: string, max = 20) => {
+  const moreThanLimit = value.length > max;
+  return moreThanLimit ? `${value.slice(0, max)}...` : value.slice(0, max);
+};

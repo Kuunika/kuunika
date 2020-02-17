@@ -15,6 +15,13 @@ exports[`Menu should render all menu items 1`] = `
         <div
           class="sc-bdVaJa lmvtnY"
         >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-ambulance"
+            />
+          </div>
           Clinical
         </div>
       </a>
@@ -26,6 +33,13 @@ exports[`Menu should render all menu items 1`] = `
         <div
           class="sc-bdVaJa jWaYE"
         >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-user-md"
+            />
+          </div>
           Menu2
         </div>
       </a>
@@ -37,6 +51,13 @@ exports[`Menu should render all menu items 1`] = `
         <div
           class="sc-bdVaJa jWaYE"
         >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-pills"
+            />
+          </div>
           Menu3
         </div>
       </a>

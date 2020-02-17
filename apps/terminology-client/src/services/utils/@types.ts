@@ -7,6 +7,8 @@ export interface Category {
   categoryTitle: string;
   id: null | string | number;
   categories: Array<Category>;
+  description: string;
+  icons?: Array<string>;
 }
 
 export interface CategoryData {

@@ -20,6 +20,7 @@ function Menu() {
     ? categories.map(category => ({
         name: category.categoryTitle.toLowerCase().replace(' ', ''),
         displayName: category.categoryTitle,
+        icon: category.icons,
         link: `/${category.categoryTitle.replace(' ', '-').toLowerCase()}`
       }))
     : [];
@@ -63,6 +64,7 @@ interface IMenuItem {
   name: string;
   displayName: string;
   link: string;
+  icon: Array<string>;
 }
 interface IViewProps {
   items: Array<IMenuItem>;

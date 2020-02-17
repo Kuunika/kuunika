@@ -68,7 +68,7 @@ exports[`Concepts Page should render concepts page 1`] = `
         class="sc-kAzzGY LlbHt"
       >
         <a
-          download="Terminologies_Fri Feb 14 2020.csv"
+          download="Terminologies_Mon Feb 17 2020.csv"
           href="data:text/csv;charset=utf-8,﻿\\"id\\",\\"name\\"
 \\"1\\",\\"name\\"
 \\"2\\",\\"name2\\"
