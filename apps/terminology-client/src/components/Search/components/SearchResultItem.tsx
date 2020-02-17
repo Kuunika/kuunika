@@ -25,12 +25,16 @@ function SearchResultItem({
     dispatch(setSearchResultsState(false));
   };
   return (
-    <Wrapper>
+    <Wrapper data-testid="search-result-item">
       <Category>
         Category: <i>{breadcrumbCategory}</i>
         <p>{numberOfResults} records found</p>
       </Category>
-      <Btn style={{ width: '8rem', height: '2.5rem' }} onClick={onClick}>
+      <Btn
+        style={{ width: '8rem', height: '2.5rem' }}
+        onClick={onClick}
+        data-testid="search-result-btn"
+      >
         {' '}
         View{' '}
       </Btn>

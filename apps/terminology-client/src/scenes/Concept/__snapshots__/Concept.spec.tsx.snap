@@ -9,7 +9,9 @@ exports[`Concept should render concept page successfully 1`] = `
     >
       <button
         class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-1 MuiButton-outlined"
+        icon="[object Object]"
         tabindex="0"
+        theme="default"
         type="button"
       >
         <span

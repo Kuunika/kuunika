@@ -13,6 +13,7 @@ declare namespace Cypress {
     getMenu(): any;
     getConcepts(id: string): any;
     getConcept(id: string, conceptId: string): any;
+    searchConcept(value: string): any;
   }
 }
 
@@ -26,6 +27,10 @@ Cypress.Commands.add('getConcepts', id => {
 
 Cypress.Commands.add('getConcept', (id, conceptId) => {
   return API.getConcept(id, conceptId);
+});
+
+Cypress.Commands.add('searchConcept', value => {
+  return API.searchConcept(value);
 });
 //
 // -- This is a child command --

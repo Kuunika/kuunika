@@ -33,7 +33,7 @@ export default SearchResults;
 
 export function SearchResultsView({ data, loading, error }: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="search-container">
       {loading && (
         <div>
           <LinearProgress />

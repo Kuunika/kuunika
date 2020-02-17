@@ -62,6 +62,7 @@ export function SearchView(props: ViewProps) {
       <Wrapper>
         <InputGroup>
           <Input
+            data-testid="search-box"
             placeholder="Search"
             onFocus={props.onFocus as FocusEventHandler<any>}
             onChange={e => props.onChange(e.target.value)}

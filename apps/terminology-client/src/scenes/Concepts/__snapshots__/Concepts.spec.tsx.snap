@@ -78,6 +78,7 @@ exports[`Concepts Page should render concepts page 1`] = `
           <button
             class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-1 MuiButton-contained"
             tabindex="0"
+            theme="success"
             type="button"
           >
             <span
