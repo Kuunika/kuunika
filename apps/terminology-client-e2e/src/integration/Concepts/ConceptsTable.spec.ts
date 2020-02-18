@@ -62,6 +62,35 @@ describe('Shows Concepts Table', () => {
       });
     });
   });
+  it('Filters table', () => {
+    cy.location().then(loc => {
+      const conceptId = loc.pathname.split('/')[
+        loc.pathname.split('/').length - 1
+      ];
+      // @ts-ignore
+      cy.getConcepts(conceptId).then(results => {
+        const searchValue = 'Polio';
+        cy.get('[data-testid=table-search]').type(searchValue);
+        const formatedData = tableData.results.filter(t => {
+          return JSON.stringify(t)
+            .toLowerCase()
+            .includes(searchValue.toLowerCase());
+        });
+
+        cy.get('[data-testid=concepts-table] table tbody tr').each(
+          (element, rowIndex) => {
+            cy.wrap(element)
+              .children()
+              .each((element, index) => {
+                cy.wrap(element).contains(
+                  formatedData[rowIndex][tableData.sourceHeadings[index]]
+                );
+              });
+          }
+        );
+      });
+    });
+  });
 });
 
 const recursiveCategoriesTest = (data: Array<Category>) => {

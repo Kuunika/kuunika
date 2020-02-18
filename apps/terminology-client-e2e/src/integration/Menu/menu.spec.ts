@@ -3,7 +3,7 @@
 import { Category } from '../../../../terminology-client/src/services/utils/@types';
 const config = require('../../support/config.json');
 
-describe('terminology-client', () => {
+describe('Menu', () => {
   const FRONTEND_URL = config.FRONTEND_URL;
   before(() => cy.visit('/'));
 

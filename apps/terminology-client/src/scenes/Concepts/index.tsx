@@ -83,6 +83,7 @@ export function ConceptsView({
         <CategoryBreadCrumb data={breadCrumb} />
         <InputGroup>
           <Input
+            data-testid="table-search"
             placeholder="Search"
             value={filter}
             onChange={e => onChangeSearch(e.target.value)}
