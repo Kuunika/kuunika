@@ -164,6 +164,87 @@
           }
         }
       }
+    },
+    "terminology-redis": {
+      "root": "apps/terminology-redis",
+      "sourceRoot": "apps/terminology-redis/src",
+      "projectType": "application",
+      "prefix": "terminology-redis",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/terminology-redis",
+            "main": "apps/terminology-redis/src/main.ts",
+            "tsConfig": "apps/terminology-redis/tsconfig.app.json",
+            "assets": ["apps/terminology-redis/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/terminology-redis/src/environments/environment.ts",
+                  "with": "apps/terminology-redis/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "terminology-redis:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/terminology-redis/.eslintrc",
+            "tsConfig": [
+              "apps/terminology-redis/tsconfig.app.json",
+              "apps/terminology-redis/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/terminology-redis/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/terminology-redis/jest.config.js",
+            "tsConfig": "apps/terminology-redis/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "redis-connection": {
+      "root": "libs/redis-connection",
+      "sourceRoot": "libs/redis-connection/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/redis-connection/tsconfig.lib.json",
+              "libs/redis-connection/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/redis-connection/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/redis-connection/jest.config.js",
+            "tsConfig": "libs/redis-connection/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

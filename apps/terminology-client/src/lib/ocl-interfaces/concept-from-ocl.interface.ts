@@ -1,0 +1,30 @@
+import { Description, Name } from "./category-from-ocl.interface";
+export interface ConceptFromOCL {
+    type:               string;
+    uuid:               string;
+    id:                 string;
+    external_id:        string;
+    concept_class:      string;
+    datatype:           string;
+    display_name:       string;
+    display_locale:     string;
+    names:              Name[];
+    descriptions:       Description[];
+    retired:            boolean;
+    source:             string;
+    source_url:         string;
+    owner:              string;
+    owner_type:         string;
+    owner_url:          string;
+    version:            string;
+    created_on:         string;
+    updated_on:         string;
+    version_created_on: string;
+    version_created_by: string;
+    extras:             {};
+    mappings:           null;
+    is_latest_version:  boolean;
+    locale:             null;
+    version_url:        string;
+    url:                string;
+}

@@ -17,9 +17,17 @@
     "terminology-client": {
       "tags": []
     },
+<<<<<<< Updated upstream
     "terminology-client-e2e": {
       "tags": [],
       "implicitDependencies": ["terminology-client"]
+=======
+    "terminology-redis": {
+      "tags": []
+    },
+    "redis-connection": {
+      "tags": []
+>>>>>>> Stashed changes
     }
   }
 }
