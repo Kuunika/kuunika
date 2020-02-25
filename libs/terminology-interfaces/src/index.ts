@@ -5,5 +5,5 @@ export * from './lib/search-category.interface';
 export * from './lib/search-result.interface';
 export * from './lib/search.interface';
 export * from './lib/source.interface';
-export * from './lib/ocl-interfaces/category-from-ocl.interface';
-export * from './lib/ocl-interfaces/concept-from-ocl.interface';
+export * from './ocl-interfaces/category-from-ocl.interface';
+export * from './ocl-interfaces/concept-from-ocl.interface';

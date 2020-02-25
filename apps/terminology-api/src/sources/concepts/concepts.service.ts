@@ -15,6 +15,7 @@ export class ConceptsService {
 
     if(RedisSingleton.getInstance().connected) {
       source = await RedisSingleton.convertHgetToObject<CategoryFromOCL>('categories', sourceId);
+      
       if(source === null){
         throw new HttpException({
           error: 404,
@@ -43,10 +44,10 @@ export class ConceptsService {
     );
   }
 
-  buildTermDescription(sourceObject: ConceptFromOCL, breadcrumbs: string, headings: string[]) {
+  buildTermDescription(sourceObject: ConceptFromOCL, breadcrumb: string, headings: string[]) {
     const termDescription: Concept = {
         id: sourceObject.id,
-        breadcrumbs,
+        breadcrumb,
         headings: [],
         descriptions: []
     };

@@ -15,16 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-<<<<<<< Updated upstream
-    "paths": {}
-=======
     "paths": {
       "@kuunika/terminology-interfaces": [
         "libs/terminology-interfaces/src/index.ts"
       ],
       "@kuunika/redis-connection": ["libs/redis-connection/src/index.ts"]
     }
->>>>>>> Stashed changes
   },
   "exclude": ["node_modules", "tmp"]
 }
