@@ -50,8 +50,6 @@ export class SourcesService {
     return RedisSingleton.convertHvalsToArrayOfObjects<ConceptFromOCL>(key);
   }
 
-  
-
   private filterConcepts(categoryFromOCL: CategoryFromOCL, conceptsFromOCL: ConceptFromOCL[], conceptsHeadings: string[], filterTerm: string) {
     const keys = this.createConceptHeadings(categoryFromOCL.extras.Table);
     const searchableList = this.searchService.buildSearchableLists(conceptsFromOCL, conceptsHeadings);
