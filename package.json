@@ -25,7 +25,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "terminology-api": "nx serve terminology-api",
-    "terminology-client":"nx serve terminology-client",
+    "terminology-client": "nx serve terminology-client",
     "terminology-redis": "nx serve terminology-redis"
   },
   "private": true,

@@ -5,7 +5,7 @@
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import {RedisSingleton} from '@kuunika/redis-connection'; 
+import { RedisSingleton } from '@kuunika/redis-connection';
 
 async function bootstrap() {
   RedisSingleton.getInstance();
@@ -17,16 +17,15 @@ async function bootstrap() {
 
   app.enableCors({
     origin: true,
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "preflightContinue": false,
-        "optionsSuccessStatus": 204,
-        "credentials":true
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true
   });
 
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
-
 }
 
 bootstrap();

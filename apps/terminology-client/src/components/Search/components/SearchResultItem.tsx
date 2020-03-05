@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setSearchResultsState } from 'apps/terminology-client/src/services/redux/actions/ui';
 
 function SearchResultItem({
-  breadcrumbCategory,
+  categoryBreadcrumb,
   numberOfResults,
   sourceId,
   searchTerm
@@ -18,7 +18,7 @@ function SearchResultItem({
   const dispatch = useDispatch();
 
   const onClick = () => {
-    const link = `/${breadcrumbCategory}/view/search/${sourceId}/${encodeURI(
+    const link = `/${categoryBreadcrumb}/view/search/${sourceId}/${encodeURI(
       searchTerm
     )}`;
     history.push(link);
@@ -27,7 +27,7 @@ function SearchResultItem({
   return (
     <Wrapper data-testid="search-result-item">
       <Category>
-        Category: <i>{breadcrumbCategory}</i>
+        Category: <i>{categoryBreadcrumb}</i>
         <p>{numberOfResults} records found</p>
       </Category>
       <Btn

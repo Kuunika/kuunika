@@ -18,7 +18,7 @@ export interface CategoryData {
 }
 
 export interface ISearchCategory {
-  breadcrumbCategory: string;
+  categoryBreadcrumb: string;
   numberOfResults: number | string;
   sourceId: string;
   searchTerm?: string;
