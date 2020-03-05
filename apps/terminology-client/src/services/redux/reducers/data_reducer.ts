@@ -23,7 +23,7 @@ const initialState = {
   } as Object,
   search: {
     searchTerm: '',
-    searchCategories: []
+    searchResults: []
   }
 } as IData;
 
@@ -71,8 +71,8 @@ export default (
         ...state,
         search: {
           searchTerm: action.payload,
-          searchCategories:
-            action.payload.length == 0 ? [] : state.search.searchCategories
+          searchResults:
+            action.payload.length == 0 ? [] : state.search.searchResults
         }
       };
     default:

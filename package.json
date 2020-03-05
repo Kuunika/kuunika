@@ -5,7 +5,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "start:terminology-service":"nx serve terminology-api && nx serve terminology-client",
+    "start:terminology-service": "nx serve terminology-api && nx serve terminology-client",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -25,6 +25,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "terminology-api": "nx serve terminology-api",
+    "terminology-client":"nx serve terminology-client",
     "terminology-redis": "nx serve terminology-redis"
   },
   "private": true,

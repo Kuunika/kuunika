@@ -39,11 +39,11 @@ export function SearchResultsView({ data, loading, error }: ViewProps) {
           <LinearProgress />
         </div>
       )}
-      {data.searchCategories.length == 0 && !loading && (
+      {data.searchResults.length == 0 && !loading && (
         <div>No results for search</div>
       )}
       {error.length > 0 && <div>{error[0]}</div>}
-      {data.searchCategories.map(result => (
+      {data.searchResults.map(result => (
         <SearchResultItem
           key={result.sourceId}
           {...result}

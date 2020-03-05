@@ -25,7 +25,7 @@ export interface ISearchCategory {
 }
 export interface ISearch {
   searchTerm: string;
-  searchCategories: Array<ISearchCategory>;
+  searchResults: Array<ISearchCategory>;
 }
 export interface Concept {
   id: number | string | null;
