@@ -7,16 +7,30 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-// eslint-disable-next-line @typescript-eslint/no-namespace
+import API from '../../../terminology-client/src/services/api'; // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
   interface Chainable<Subject> {
-    login(email: string, password: string): void;
+    getMenu(): any;
+    getConcepts(id: string): any;
+    getConcept(id: string, conceptId: string): any;
+    searchConcept(value: string): any;
   }
 }
-//
-// -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+
+Cypress.Commands.add('getMenu', () => {
+  return API.getCategories();
+});
+
+Cypress.Commands.add('getConcepts', (id, filterTerm = '') => {
+  return API.getCategoryData(id, filterTerm);
+});
+
+Cypress.Commands.add('getConcept', (id, conceptId) => {
+  return API.getConcept(id, conceptId);
+});
+
+Cypress.Commands.add('searchConcept', value => {
+  return API.searchConcept(value);
 });
 //
 // -- This is a child command --

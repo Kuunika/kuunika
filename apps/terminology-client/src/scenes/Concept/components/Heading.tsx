@@ -10,7 +10,15 @@ function Heading({ data }: Props) {
     <Wrapper>
       <Grid container spacing={4}>
         {data.map(d => (
-          <Grid item xs={12} sm={12} md={6} lg={6} key={d.title}>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            lg={6}
+            key={d.title}
+            data-testid="description-header"
+          >
             <Title>{d.title}: </Title>
             <span>{d.value}</span>
           </Grid>

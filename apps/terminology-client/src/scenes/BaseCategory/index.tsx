@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
 import CategoryCard from '../../components/CategoryCard';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { PageHeading } from '../../components/PageHeading/PageHeading';
@@ -7,12 +7,15 @@ import { State, Category as ICategory } from '../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSubCategories } from '../../services/utils/helpers';
 import { setActivePage } from '../../services/redux/actions/ui';
+import styled from 'styled-components';
 
 function Category(props) {
   const [pageTitle, setPageTitle] = useState('');
-  const [breadClumb, setBreadClumb] = useState([]);
+  const [breadCrumb, setbreadCrumb] = useState([]);
 
   const categories = useSelector((state: State) => state.data.categories);
+
+  const loading = useSelector((state: State) => state.loading.getCategories);
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
@@ -22,8 +25,8 @@ function Category(props) {
       ? `${category.categoryTitle}/view/${category.id}`
       : category.categoryTitle;
     link =
-      breadClumb.length > 0
-        ? `/${breadClumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
+      breadCrumb.length > 0
+        ? `/${breadCrumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
         : `/${link.toLowerCase().replace(' ', '-')}`;
 
     props.history.push(link);
@@ -45,36 +48,81 @@ function Category(props) {
     let locationArray = props.location.pathname.split('/');
     locationArray =
       locationArray[1].length === 0 ? [] : [...locationArray].slice(1);
-    setBreadClumb([...locationArray]);
+    setbreadCrumb([...locationArray]);
   }, [props.location.pathname]);
 
   useEffect(() => {
     setData(
-      getSubCategories(categories, [...breadClumb]).map(dt => ({
+      getSubCategories(categories, [...breadCrumb]).map((dt: ICategory) => ({
         title: dt.categoryTitle,
-        content: 'example content',
+        content: dt.description,
+        icons: dt.icons,
         onClick: () => onClick(dt)
       }))
     );
-  }, [breadClumb, categories]);
+  }, [breadCrumb, categories]);
 
   return (
-    <>
-      <PageHeading>{pageTitle}</PageHeading>
-      {breadClumb.length > 0 && <CategoryBreadCrumb data={breadClumb} />}
+    <CategoryView
+      pageTitle={pageTitle}
+      data={data}
+      breadCrumb={breadCrumb}
+      loading={loading}
+    />
+  );
+}
+export default Category;
+
+export const LoadingCategories = () => (
+  <LoaderContainer>
+    <CircularProgress />
+  </LoaderContainer>
+);
+
+export const CategoryView = ({
+  pageTitle,
+  breadCrumb,
+  data,
+  loading
+}: ViewProps) => (
+  <>
+    <PageHeading data-testid="page-title">{pageTitle}</PageHeading>
+    {breadCrumb.length > 0 && <CategoryBreadCrumb data={breadCrumb} />}
+    {loading ? (
+      <LoadingCategories />
+    ) : (
       <Grid container spacing={4}>
-        {data.map(({ title, content, onClick }) => (
+        {data.map(({ title, content, onClick, icons }) => (
           <Grid item xs={12} sm={12} md={4} lg={4} key={title}>
             <CategoryCard
               key={title}
               title={title}
               content={content}
+              icons={icons}
               onClick={onClick}
             />
           </Grid>
         ))}
       </Grid>
-    </>
-  );
+    )}
+  </>
+);
+
+interface ViewProps {
+  pageTitle: string;
+  breadCrumb: Array<string>;
+  data: Array<{
+    title: string;
+    content: string;
+    onClick: Function;
+    icons: Array<string>;
+  }>;
+  loading: boolean;
 }
-export default Category;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  min-height: 20rem;
+  align-items: center;
+  justify-content: center;
+`;

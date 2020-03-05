@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import styled from 'styled-components';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid, Hidden, Paper, Button } from '@material-ui/core';
 
 import SideBar from '../components/SideBar';
 
@@ -11,6 +11,8 @@ import { useDispatch } from 'react-redux';
 import Search from '../components/Search';
 
 import { getCategories } from '../services/redux/actions/data';
+import Notification from '../components/Notification';
+import Error from '../components/Error';
 
 const ContentContainer = styled.div`
   padding: 30px;
@@ -29,6 +31,8 @@ export function App() {
   return <AppView />;
 }
 
+export default App;
+
 export const AppView = () => {
   return (
     <ContentContainer>
@@ -40,11 +44,11 @@ export const AppView = () => {
         </Hidden>
         <Grid item xs={12} sm={12} md={10} lg={10}>
           <Search />
+          {/* <Notification /> */}
+          <Error />
           <Page />
         </Grid>
       </Grid>
     </ContentContainer>
   );
 };
-
-export default App;

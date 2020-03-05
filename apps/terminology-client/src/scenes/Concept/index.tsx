@@ -3,17 +3,19 @@ import styled from 'styled-components';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { getConcept } from '../../services/redux/actions/data';
-import { State } from '../../services/utils/@types';
+import { State, Concept as IConcept } from '../../services/utils/@types';
 import Btn from '../../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import Heading from './components/Heading';
 import Body from './components/Body';
+import ContentLoader from 'react-content-loader';
 
 function Concept(props) {
   const dispatch = useDispatch();
   const [breadClumb, setBreadClumb] = useState([]);
 
+  const loading = useSelector((state: State) => state.loading.getConcept);
   const data = useSelector((state: State) => {
     return state.data.concept[
       `${props.match.params.id}${props.match.params.conceptId}`
@@ -23,6 +25,10 @@ function Concept(props) {
         ]
       : state.data.concept['default'];
   });
+
+  const onBack = () => {
+    props.history.goBack();
+  };
 
   useEffect(() => {
     if (
@@ -39,17 +45,29 @@ function Concept(props) {
   }, [props.match.params]);
 
   return (
-    <ConceptView data={data} breadCrumb={breadClumb} history={props.history} />
+    <ConceptView
+      data={data}
+      breadCrumb={breadClumb}
+      onBack={onBack}
+      loading={loading}
+    />
   );
 }
 
 export default Concept;
 
-function ConceptView({ data, breadCrumb, history }) {
+export const ConceptLoading = () => (
+  <ContentLoader viewBox={`0 0 200 100`}>
+    <rect x="0" y="0" rx="5" ry="5" width="200" height="25" />
+    <rect x="0" y="40" rx="5" ry="5" width="200" height="45" />
+  </ContentLoader>
+);
+
+export function ConceptView({ data, breadCrumb, onBack, loading }: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="concept-description">
       <Btn
-        onClick={() => history.goBack()}
+        onClick={onBack}
         theme="default"
         icon={<FontAwesomeIcon icon={faCaretLeft} />}
       >
@@ -58,10 +76,23 @@ function ConceptView({ data, breadCrumb, history }) {
       <BreadCrumb>
         <CategoryBreadCrumb data={breadCrumb} />
       </BreadCrumb>
-      <Heading data={data.headings}></Heading>
-      <Body data={data.descriptions} />
+      {loading ? (
+        <ConceptLoading />
+      ) : (
+        <>
+          <Heading data={data.headings}></Heading>
+          <Body data={data.descriptions} />
+        </>
+      )}
     </Wrapper>
   );
+}
+
+interface ViewProps {
+  data: IConcept;
+  breadCrumb: Array<string>;
+  onBack: Function;
+  loading: boolean;
 }
 
 const Wrapper = styled.div`

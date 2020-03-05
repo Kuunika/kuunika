@@ -7,6 +7,10 @@ const initialState = {
     default: {
       sourceHeadings: [],
       results: []
+    },
+    searchResults: {
+      sourceHeadings: [],
+      results: []
     }
   } as Object,
   concept: {
@@ -16,7 +20,11 @@ const initialState = {
       descriptions: [],
       breadcrumb: ''
     }
-  } as Object
+  } as Object,
+  search: {
+    searchTerm: '',
+    searchCategories: []
+  }
 } as IData;
 
 export default (
@@ -34,7 +42,15 @@ export default (
         ...state,
         categoryData: {
           ...state.categoryData,
-          [action.meta]: action.payload.data
+          [action.meta.id]: action.payload.data
+        }
+      };
+    case actions.getSearchResults + '_FULFILLED':
+      return {
+        ...state,
+        categoryData: {
+          ...state.categoryData,
+          searchResults: action.payload.data
         }
       };
     case actions.getConcept + '_FULFILLED':
@@ -42,7 +58,21 @@ export default (
         ...state,
         concept: {
           ...state.concept,
-          [action.meta]: action.payload.data
+          [`${action.meta.id}${action.meta.conceptId}`]: action.payload.data
+        }
+      };
+    case actions.searchConcept + '_FULFILLED':
+      return {
+        ...state,
+        search: action.payload.data
+      };
+    case actions.setSearchValue:
+      return {
+        ...state,
+        search: {
+          searchTerm: action.payload,
+          searchCategories:
+            action.payload.length == 0 ? [] : state.search.searchCategories
         }
       };
     default:

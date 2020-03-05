@@ -6,7 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryData } from '../../services/redux/actions/data';
 import { State, CategoryData } from '../../services/utils/@types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes,
+  faSearch,
+  faCaretLeft
+} from '@fortawesome/free-solid-svg-icons';
+import ContentLoader from 'react-content-loader';
+import { CircularProgress } from '@material-ui/core';
+import Btn from '../../components/Button';
+import { CSVLink } from 'react-csv';
 
 function Concepts(props) {
   const dispatch = useDispatch();
@@ -15,10 +23,20 @@ function Concepts(props) {
   const [formatedData, setFormatedData] = useState([]);
 
   const data = useSelector((state: State) => {
-    return state.data.categoryData[props.match.params.id]
+    const filter = props.match.params.search&&props.match.params.search.length > 0;
+    return filter
+      ? state.data.categoryData.searchResults
+      : state.data.categoryData[props.match.params.id]
       ? state.data.categoryData[props.match.params.id]
       : state.data.categoryData['default'];
   });
+
+  const loading = useSelector(
+    (state: State) =>
+      state.loading.getCategoryData || state.loading.getSearchResults
+  );
+
+  const onBack = () => props.history.goBack();
 
   useEffect(() => {
     const dt = data.results.filter(t => {
@@ -30,6 +48,12 @@ function Concepts(props) {
   }, [search, data]);
 
   useEffect(() => {
+    if (props.match.params.search) {
+      dispatch(
+        getCategoryData(props.match.params.id, props.match.params.search)
+      );
+      return;
+    }
     if (props.match.params.id && data.results.length == 0)
       dispatch(getCategoryData(props.match.params.id));
   }, [props.match.params]);
@@ -49,19 +73,40 @@ function Concepts(props) {
       breadCrumb={breadClumb}
       onChangeSearch={onChangeSearch}
       filter={search}
+      loading={loading}
+      onBack={onBack}
     />
   );
 }
 
 export default Concepts;
-
-function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
+export const LoadingConcepts = () => (
+  <LoaderContainer>
+    <CircularProgress />
+  </LoaderContainer>
+);
+export function ConceptsView({
+  data,
+  breadCrumb,
+  onChangeSearch,
+  filter,
+  loading,
+  onBack
+}: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="concepts-table">
+      <Btn
+        onClick={onBack}
+        theme="default"
+        icon={<FontAwesomeIcon icon={faCaretLeft} />}
+      >
+        BACK
+      </Btn>
       <TableTitleContainer>
         <CategoryBreadCrumb data={breadCrumb} />
         <InputGroup>
           <Input
+            data-testid="table-search"
             placeholder="Search"
             value={filter}
             onChange={e => onChangeSearch(e.target.value)}
@@ -80,8 +125,19 @@ function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
           </Addon>
         </InputGroup>
       </TableTitleContainer>
-
-      <Table headings={data.sourceHeadings} data={data.formatedData} />
+      <DownloadContainer>
+        <CSVLink
+          data={data.formatedData}
+          filename={`Terminologies_${new Date().toDateString()}.csv`}
+        >
+          <Btn theme="success">Download</Btn>
+        </CSVLink>
+      </DownloadContainer>
+      {loading ? (
+        <LoadingConcepts />
+      ) : (
+        <Table headings={data.sourceHeadings} data={data.formatedData} />
+      )}
     </Wrapper>
   );
 }
@@ -91,6 +147,8 @@ interface ViewProps {
   breadCrumb: Array<string>;
   onChangeSearch: Function;
   filter: string;
+  loading: boolean;
+  onBack: Function;
 }
 const Wrapper = styled.div`
   background: #f4f4f4;
@@ -138,4 +196,18 @@ const Addon = styled.div`
   border-radius: 0rem 1.5rem 1.5rem 0rem;
   color: gray;
   cursor: pointer;
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  min-height: 40rem;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DownloadContainer = styled.div`
+  text-align: right;
+  a {
+    text-decoration: none;
+  }
 `;

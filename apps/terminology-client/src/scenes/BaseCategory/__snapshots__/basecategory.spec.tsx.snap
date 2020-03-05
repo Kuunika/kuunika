@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Base Category should render all categories successfully 1`] = `
+<body>
+  <div>
+    <h1
+      class="sc-gZMcBi gbFmTi"
+      data-testid="page-title"
+    >
+      All categories
+    </h1>
+    <h2
+      class="sc-htoDjs gcNGiZ"
+      data-testid="breadcrumb"
+    >
+      <b>
+        Category: 
+      </b>
+      <span>
+        <i
+          class="sc-dnqmqq dmyeZC"
+        >
+          clinical
+        </i>
+      </span>
+    </h2>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-4"
+      >
+        <div
+          class="sc-bwzfXH kDFgrS"
+          data-testid="category-card"
+        >
+          <div
+            class="sc-htpNat bKNYPk"
+          >
+            Terms
+          </div>
+          <div
+            class="sc-bZQynM jdkaLI"
+          >
+            <div
+              class="MuiCollapse-container"
+              style="min-height: 130px;"
+            >
+              <div
+                class="MuiCollapse-wrapper"
+              >
+                <div
+                  class="MuiCollapse-wrapperInner"
+                >
+                  <p
+                    class="sc-bxivhb bOQPMu"
+                  >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur repellendus, dolorum quaerat q...
+                     
+                    <span
+                      class="sc-ifAKCX fgMmKS"
+                    >
+                      More
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-gzVnrw gvjADP"
+            />
+          </div>
+          <div
+            class="sc-EHOje kbtVIC"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-109 MuiButton-contained"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                VIEW
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-4"
+      >
+        <div
+          class="sc-bwzfXH kDFgrS"
+          data-testid="category-card"
+        >
+          <div
+            class="sc-htpNat bKNYPk"
+          >
+            Clinical
+          </div>
+          <div
+            class="sc-bZQynM jdkaLI"
+          >
+            <div
+              class="MuiCollapse-container"
+              style="min-height: 130px;"
+            >
+              <div
+                class="MuiCollapse-wrapper"
+              >
+                <div
+                  class="MuiCollapse-wrapperInner"
+                >
+                  <p
+                    class="sc-bxivhb bOQPMu"
+                  >
+                    
+                     
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-gzVnrw gvjADP"
+            />
+          </div>
+          <div
+            class="sc-EHOje kbtVIC"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-142 MuiButton-contained"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                VIEW
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Base Category should render top level categories successfully 1`] = `
+<body>
+  <div>
+    <h1
+      class="sc-gZMcBi gbFmTi"
+      data-testid="page-title"
+    >
+      All categories
+    </h1>
+    <h2
+      class="sc-htoDjs gcNGiZ"
+      data-testid="breadcrumb"
+    >
+      <b>
+        Category: 
+      </b>
+      <span>
+        <i
+          class="sc-dnqmqq dmyeZC"
+        >
+          clinical
+        </i>
+      </span>
+    </h2>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-4"
+      >
+        <div
+          class="sc-bwzfXH igkUtn"
+          data-testid="category-card"
+        >
+          <div
+            class="sc-htpNat bKNYPk"
+          >
+            Terms
+          </div>
+          <div
+            class="sc-bZQynM jdkaLI"
+          >
+            <div
+              class="MuiCollapse-container"
+              style="min-height: 130px;"
+            >
+              <div
+                class="MuiCollapse-wrapper"
+              >
+                <div
+                  class="MuiCollapse-wrapperInner"
+                >
+                  <p
+                    class="sc-bxivhb bOQPMu"
+                  >
+                    test
+                     
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-gzVnrw gvjADP"
+            >
+              <i
+                class="fas fa-ambulance"
+              />
+            </div>
+          </div>
+          <div
+            class="sc-EHOje kbtVIC"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-261 MuiButton-contained"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                VIEW
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-4"
+      >
+        <div
+          class="sc-bwzfXH igkUtn"
+          data-testid="category-card"
+        >
+          <div
+            class="sc-htpNat bKNYPk"
+          >
+            Service
+          </div>
+          <div
+            class="sc-bZQynM jdkaLI"
+          >
+            <div
+              class="MuiCollapse-container"
+              style="min-height: 130px;"
+            >
+              <div
+                class="MuiCollapse-wrapper"
+              >
+                <div
+                  class="MuiCollapse-wrapperInner"
+                >
+                  <p
+                    class="sc-bxivhb bOQPMu"
+                  >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur repellendus, dolorum quaerat q...
+                     
+                    <span
+                      class="sc-ifAKCX fgMmKS"
+                    >
+                      More
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="sc-gzVnrw iKwUPB"
+            >
+              <i
+                class="fas fa-user-md"
+              />
+              <i
+                class="fas fa-user-nurse"
+              />
+            </div>
+          </div>
+          <div
+            class="sc-EHOje kbtVIC"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-294 MuiButton-contained"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                VIEW
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { State } from '../../../../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActivePage } from '../../../../../services/redux/actions/ui';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 function MenuItem({ item }: Props) {
   const activePage = useSelector((state: State) => state.ui.activePage);
+
   const dispatch = useDispatch();
   const onClick = useCallback(
     item => {
@@ -31,10 +33,12 @@ export const MenuItemView = ({ item, active, onClick }: Props) => {
           onClick(item);
         }
       }}
-      data-test={`menu${item.name}`}
+      data-testid={`menu-${item.name}`}
     >
       <Wrapper active={active}>
-        {/* <Icon>{item.icon}</Icon> */}
+        <Icon>
+          {item.icon && item.icon.length > 0 && <i className={item.icon[0]} />}
+        </Icon>
         {item.displayName}
       </Wrapper>
     </Link>
@@ -46,6 +50,7 @@ interface Props {
     name: string;
     displayName: string;
     link: string;
+    icon: Array<string>;
   };
   active?: boolean;
   onClick?: Function;
