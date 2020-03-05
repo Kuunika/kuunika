@@ -21,8 +21,8 @@ Cypress.Commands.add('getMenu', () => {
   return API.getCategories();
 });
 
-Cypress.Commands.add('getConcepts', id => {
-  return API.getCategoryData(id);
+Cypress.Commands.add('getConcepts', (id, filterTerm = '') => {
+  return API.getCategoryData(id, filterTerm);
 });
 
 Cypress.Commands.add('getConcept', (id, conceptId) => {

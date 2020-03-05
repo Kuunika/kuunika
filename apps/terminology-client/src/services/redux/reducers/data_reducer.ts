@@ -7,6 +7,10 @@ const initialState = {
     default: {
       sourceHeadings: [],
       results: []
+    },
+    searchResults: {
+      sourceHeadings: [],
+      results: []
     }
   } as Object,
   concept: {
@@ -39,6 +43,14 @@ export default (
         categoryData: {
           ...state.categoryData,
           [action.meta.id]: action.payload.data
+        }
+      };
+    case actions.getSearchResults + '_FULFILLED':
+      return {
+        ...state,
+        categoryData: {
+          ...state.categoryData,
+          searchResults: action.payload.data
         }
       };
     case actions.getConcept + '_FULFILLED':

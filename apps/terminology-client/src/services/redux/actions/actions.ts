@@ -8,6 +8,7 @@ export default {
   setSearchValue: 'SET_SEARCH_VALUE',
   searchConcept: 'SEARCH_CONCEPT',
   setSearchResultsState: 'SET_SEARCH_RESULTS_STATE',
+  getSearchResults: 'GET_SEARCH_RESULTS',
 
   resetError: 'RESET_ERROR'
 };

@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryData } from '../../services/redux/actions/data';
 import { State, CategoryData } from '../../services/utils/@types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes,
+  faSearch,
+  faCaretLeft
+} from '@fortawesome/free-solid-svg-icons';
 import ContentLoader from 'react-content-loader';
 import { CircularProgress } from '@material-ui/core';
 import Btn from '../../components/Button';
@@ -19,16 +23,20 @@ function Concepts(props) {
   const [formatedData, setFormatedData] = useState([]);
 
   const data = useSelector((state: State) => {
-    return state.data.categoryData[props.match.params.id]
+    const filter = props.match.params.search&&props.match.params.search.length > 0;
+    return filter
+      ? state.data.categoryData.searchResults
+      : state.data.categoryData[props.match.params.id]
       ? state.data.categoryData[props.match.params.id]
       : state.data.categoryData['default'];
   });
 
-  const loading = useSelector((state: State) => state.loading.getCategoryData);
+  const loading = useSelector(
+    (state: State) =>
+      state.loading.getCategoryData || state.loading.getSearchResults
+  );
 
-  useEffect(() => {
-    if (props.match.params.search) setSearch(props.match.params.search);
-  }, [props.match.params]);
+  const onBack = () => props.history.goBack();
 
   useEffect(() => {
     const dt = data.results.filter(t => {
@@ -40,6 +48,12 @@ function Concepts(props) {
   }, [search, data]);
 
   useEffect(() => {
+    if (props.match.params.search) {
+      dispatch(
+        getCategoryData(props.match.params.id, props.match.params.search)
+      );
+      return;
+    }
     if (props.match.params.id && data.results.length == 0)
       dispatch(getCategoryData(props.match.params.id));
   }, [props.match.params]);
@@ -60,6 +74,7 @@ function Concepts(props) {
       onChangeSearch={onChangeSearch}
       filter={search}
       loading={loading}
+      onBack={onBack}
     />
   );
 }
@@ -75,10 +90,18 @@ export function ConceptsView({
   breadCrumb,
   onChangeSearch,
   filter,
-  loading
+  loading,
+  onBack
 }: ViewProps) {
   return (
     <Wrapper data-testid="concepts-table">
+      <Btn
+        onClick={onBack}
+        theme="default"
+        icon={<FontAwesomeIcon icon={faCaretLeft} />}
+      >
+        BACK
+      </Btn>
       <TableTitleContainer>
         <CategoryBreadCrumb data={breadCrumb} />
         <InputGroup>
@@ -125,6 +148,7 @@ interface ViewProps {
   onChangeSearch: Function;
   filter: string;
   loading: boolean;
+  onBack: Function;
 }
 const Wrapper = styled.div`
   background: #f4f4f4;
@@ -183,4 +207,7 @@ const LoaderContainer = styled.div`
 
 const DownloadContainer = styled.div`
   text-align: right;
+  a {
+    text-decoration: none;
+  }
 `;

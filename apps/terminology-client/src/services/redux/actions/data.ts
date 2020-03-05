@@ -9,9 +9,10 @@ export const getCategories = () => {
   };
 };
 
-export const getCategoryData = (id: string) => ({
-  type: actions.getCategoryData,
-  payload: API.getCategoryData(id),
+export const getCategoryData = (id: string, filterTerm = '') => ({
+  type:
+    filterTerm.length == 0 ? actions.getCategoryData : actions.getSearchResults,
+  payload: API.getCategoryData(id, filterTerm),
   meta: { id }
 });
 
