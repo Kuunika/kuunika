@@ -9,17 +9,24 @@ import {RedisSingleton} from '@kuunika/redis-connection';
 
 async function bootstrap() {
   RedisSingleton.getInstance();
-  const app = await NestFactory.create(AppModule,{
-    
-  });
+  const app = await NestFactory.create(AppModule);
   const apiVersion = 'v0';
   const globalPrefix = `api/${apiVersion}`;
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.port || 3333;
-  app.enableCors();
+
+  app.enableCors({
+    origin: true,
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "preflightContinue": false,
+        "optionsSuccessStatus": 204,
+        "credentials":true
+  });
+
   await app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
+
 }
 
 bootstrap();

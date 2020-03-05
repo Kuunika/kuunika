@@ -5,6 +5,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
+    "start:terminology-service":"nx serve terminology-api && nx serve terminology-client",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",

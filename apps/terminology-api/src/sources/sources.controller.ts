@@ -9,11 +9,11 @@ export class SourcesController {
     
     @Get(':sourceId')
     getSource(@Param('sourceId') sourceId: string, @Query('filterTerm') term = ''){
-        return this.sourceService.getSource(sourceId, term);
+        return this.sourceService.getSource(sourceId.toUpperCase(), term);
     }
 
     @Get(':sourceId/:conceptId')
     getSourceConcepts(@Param('sourceId') sourceId: string, @Param('conceptId') conceptId: string){
-        return this.conceptService.getConceptDescription(sourceId,conceptId);
+        return this.conceptService.getConceptDescription(sourceId.toUpperCase(),conceptId);
     }
 }
