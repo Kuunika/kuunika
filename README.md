@@ -1,3 +1,25 @@
+# Kuunika - Mono Repo
+
+This repo hosts a number of Kuunika projects and was generated using [Nx](https://nx.dev/) to help manage the mono repo architecture. 
+
+
+
+## Table of Contents
+
+- Terminology Service Dashboard
+- Further Help
+
+
+
+# Terminology Service Dashboard
+
+## Dependencies
+
+- [NodeJS > v10.15.0](https://nodejs.org/en/download/)
+- [Redis > 5.0.7](https://redis.io/download)
+
+
+
 ## Setup
 
 This project uses NestJs for its api backend and ReactJs for front end. Click the following link to thier respective documentation for more information on [NestJs](https://docs.nestjs.com/) and [ReactJS](https://reactjs.org/docs/getting-started.html) .
