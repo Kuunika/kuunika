@@ -1,76 +1,91 @@
-# Kuunika
+## Setup
 
-This project was generated using [Nx](https://nx.dev).
+This project uses NestJs for its api backend and ReactJs for front end. Click the following link to thier respective documentation for more information on [NestJs](https://docs.nestjs.com/) and [ReactJS](https://reactjs.org/docs/getting-started.html) .
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+This installation guide assumes that you have read and setup Open Concept Lab according to the guide provided in the Kuunika Repos [Wiki](https://github.com/Kuunika/kuunika/wiki/Terminology-Service-Dashboard---Configuring-Open-Concept-Lab).
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
-## Adding capabilities to your workspace
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Installation
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+#### Step 1: Clone Repo
 
-Below are some plugins which you can add to your workspace:
+Clone this repository into your local directory, Use the command below:
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+```bash
+# Clone project to a computer
+git clone https://github.com/Kuunika/kuunika
 
-## Generate an application
+# Navigate to the project root directory
+cd kuunika
+```
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+#### Step 2: Install Dependencies
 
-> You can use any of the plugins above to generate applications as well.
+In the root directory of the project run the following command
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```bash
+# install all dependancies
+npm install
+```
 
-## Generate a library
+#### Step 3: Run Tests
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+```shell
+# install all dependancies
+npm run test
+```
 
-> You can also use any of the plugins above to generate libraries as well.
+#### Step 4: Edit Env File
 
-Libraries are sharable across libraries and applications. They can be imported from `@kuunika/mylib`.
+In the root directory there exist a file named *'.env.example'* create a copy of this file, rename the copy to *'.env'* and open it to edit the contents.
 
-## Development server
+```bash
+# API key used to make request to the OCL API Service
+OCL_API_KEY='*'
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+OCL_API='*' #Base URL Of OCL or URL of internally hosted instance of OCL, ex https://api.openconceptlab.org/
 
-## Code scaffolding
+OCL_CATEGORIES_API_URL='*' #URL of Source containing categories data that the api will route requests, ex: orgs/:OrgName/sources/:SampleSourceName/
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+REDIS_HOST=* #Address of Redis instance host
 
-## Build
+REDIS_PORT='6379' #Port used to access redis. Default port 6379
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+#### Step 5: Populate Redis With Data From OCL
 
-## Running unit tests
+```shell
+# Command for populating Redis with OCL Data
+npm run terminology-redis
+```
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+#### Step 6: Start Backend
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+In the root directory of the project run the following command and the api will be running on port 3333
 
-## Running end-to-end tests
+```shell
+# Command for starting the backend api
+npm run terminology-api
+```
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+#### Step 7: Start Frontend
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+In the root directory of the project run the following command and the frontend will be running on port 4200
 
-## Understand your workspace
+```shell
+# Command for starting the frontend 
+npm run terminology-client
+```
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
-## Further help
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+# Further Help
+
+### Addictional Information
+
+Additional information can be found on project's [Wiki](https://github.com/Kuunika/kuunika/wiki) 
+
+### Reporting Issues
+
+If you have noticed a bug, you can open an issue on our [Github](https://github.com/Kuunika/kuunika/issues) Repo Page and attempt to fix.
