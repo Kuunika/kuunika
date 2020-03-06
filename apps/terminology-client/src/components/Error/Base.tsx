@@ -13,16 +13,18 @@ function BaseError({
   icon,
   status,
   action,
-  actionText
+  actionText,
+  full
 }: {
   message: string;
   icon: any;
   status: Number;
   action?: Function;
   actionText?: string;
+  full?: boolean;
 }) {
   return (
-    <Container>
+    <Container full={full}>
       <ErrorContainer>
         <Icon icon={icon} />
         <ErrorMessage>{message}</ErrorMessage>
@@ -36,13 +38,13 @@ function BaseError({
 
 export default BaseError;
 
-const Container = styled.div`
+const Container = styled('div')<{ full: boolean }>`
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85%;
-  width: 80%;
+  height: ${props => (props.full ? '100%' : '85%')};
+  width: ${props => (props.full ? '100%' : '80%')};
   background: #ebebeb;
 `;
 
