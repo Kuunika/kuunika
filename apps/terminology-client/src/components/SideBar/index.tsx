@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useCallback, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import Menu from './components/Menu';
+import { useDispatch } from 'react-redux';
+import { setActivePage } from '../../services/redux/actions/ui';
 import { theme } from '../../config/theme';
+import { Link } from 'react-router-dom';
 
 function index() {
-  return <SideBarView data-testid="side-bar" />;
+  const dispatch = useDispatch();
+  const onClick = useCallback(
+    item => {
+      dispatch(setActivePage(''));
+    },
+    [dispatch]
+  );
+  return <SideBarView data-testid="side-bar" onLogoClick={onClick} />;
 }
 
 export default index;
 
-function SideBarView() {
+function SideBarView({ onLogoClick }: { onLogoClick: Function }) {
   return (
     <Wrapper>
-      <Logo src="../../assets/favicon.ico" />
+      <Link onClick={onLogoClick as MouseEventHandler<any>} to="/">
+        <Logo src="../../assets/favicon.ico" />
+      </Link>
       <SiteName>
         Malawi <br /> Terminology <br /> Dashboard
       </SiteName>
