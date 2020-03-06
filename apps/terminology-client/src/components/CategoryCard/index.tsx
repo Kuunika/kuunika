@@ -63,7 +63,7 @@ const Title = styled.div`
 `;
 
 const Content = styled.p`
-  margin: 2rem 0rem;
+  margin: 2rem 1rem 2rem 0rem;
   font-size: 1.2rem;
   font-weight: bold;
   color: gray;
@@ -86,12 +86,13 @@ const BtnContainer = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const Icons = styled('div')<{ count: number }>`
   white-space: nowrap;
   i {
     font-size: ${props => (props.count > 1 ? '4.2rem' : '5rem')};
-    color: ${theme.darkColor};
+    color: #6e6c6a;
   }
 `;
