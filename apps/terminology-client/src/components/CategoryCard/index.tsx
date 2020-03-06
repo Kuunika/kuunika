@@ -28,7 +28,7 @@ function CategoryCard({ title, content, onClick, icons }: Props) {
         </Collapse>
         <Icons count={icons.length}>
           {icons.map((icon, index) => (
-            <i key={`${index}${icon.replace(' ', '_')}`} className={icon}></i>
+            <i key={`${index}${icon.replace(/ /gi, '_')}`} className={icon}></i>
           ))}
         </Icons>
       </ContentContainer>

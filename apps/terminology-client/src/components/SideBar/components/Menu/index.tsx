@@ -18,10 +18,10 @@ function Menu() {
 
   const MenuData = categories
     ? categories.map(category => ({
-        name: category.categoryTitle.toLowerCase().replace(' ', ''),
+        name: category.categoryTitle.toLowerCase().replace(/ /gi, ''),
         displayName: category.categoryTitle,
         icon: category.icons,
-        link: `/${category.categoryTitle.replace(' ', '-').toLowerCase()}`
+        link: `/${category.categoryTitle.replace(/ /gi, '-').toLowerCase()}`
       }))
     : [];
 

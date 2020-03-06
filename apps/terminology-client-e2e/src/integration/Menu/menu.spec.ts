@@ -18,7 +18,7 @@ describe('Menu', () => {
         cy.get(
           `[data-testid=menu-${category.categoryTitle
             .toLowerCase()
-            .replace(' ', '')}]`
+            .replace(/ /gi, '')}]`
         ).contains(category.categoryTitle);
       }
     });
@@ -32,12 +32,12 @@ describe('Menu', () => {
         cy.get(
           `[data-testid=menu-${category.categoryTitle
             .toLowerCase()
-            .replace(' ', '')}]`
+            .replace(/ /gi, '')}]`
         ).click({ force: true });
         cy.location().should(loc => {
           expect(loc.href).to.eq(
             `${FRONTEND_URL}/${category.categoryTitle
-              .replace(' ', '-')
+              .replace(/ /gi, '-')
               .toLocaleLowerCase()}`
           );
         });

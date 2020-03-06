@@ -1,17 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../config/theme';
+import { Link } from 'react-router-dom';
 
 function CategoryBreadCrumb({ data }: Props) {
+  const getLink = index => {
+    if (index == 0) {
+      return `/${data[index].toLowerCase().replace(/ /gi, '-')}`;
+    }
+    return `${getLink(index - 1)}/${data[index]
+      .toLowerCase()
+      .replace(/ /gi, '-')}`;
+  };
+
   return (
     <Wrapper data-testid="breadcrumb">
       <b>Category: </b>
       {data.map((text, index) => {
-        text = text.replace('-', ' ');
-        return (
+        text = text.replace(/-/gi, ' ');
+        return index < data.length - 1 ? (
+          <span key={text}>
+            <Link to={getLink(index)}>
+              <Location>{text}</Location>
+            </Link>
+            <Separator />
+          </span>
+        ) : (
           <span key={text}>
             <Location>{text}</Location>
-            {index < data.length - 1 && <Separator />}
           </span>
         );
       })}

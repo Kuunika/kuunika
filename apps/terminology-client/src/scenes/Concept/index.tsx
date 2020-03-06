@@ -10,11 +10,13 @@ import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import Heading from './components/Heading';
 import Body from './components/Body';
 import ContentLoader from 'react-content-loader';
+import { getBreadcrumb } from '../../services/utils/helpers';
 
 function Concept(props) {
   const dispatch = useDispatch();
-  const [breadClumb, setBreadClumb] = useState([]);
+  const [breadCrumb, setBreadCrumb] = useState([]);
 
+  const categories = useSelector((state: State) => state.data.categories);
   const loading = useSelector((state: State) => state.loading.getConcept);
   const data = useSelector((state: State) => {
     return state.data.concept[
@@ -41,13 +43,13 @@ function Concept(props) {
 
   useEffect(() => {
     let locationArray = props.match.params[0].split('/');
-    setBreadClumb([...locationArray]);
+    setBreadCrumb([...locationArray]);
   }, [props.match.params]);
 
   return (
     <ConceptView
       data={data}
-      breadCrumb={breadClumb}
+      breadCrumb={getBreadcrumb(categories, [...breadCrumb])}
       onBack={onBack}
       loading={loading}
     />

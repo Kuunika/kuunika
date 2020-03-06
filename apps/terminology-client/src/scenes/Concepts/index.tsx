@@ -15,15 +15,17 @@ import ContentLoader from 'react-content-loader';
 import { CircularProgress } from '@material-ui/core';
 import Btn from '../../components/Button';
 import { CSVLink } from 'react-csv';
+import { getBreadcrumb } from '../../services/utils/helpers';
 
 function Concepts(props) {
   const dispatch = useDispatch();
-  const [breadClumb, setBreadClumb] = useState([]);
+  const [breadCrumb, setBreadCrumb] = useState([]);
   const [search, setSearch] = useState('');
   const [formatedData, setFormatedData] = useState([]);
 
   const data = useSelector((state: State) => {
-    const filter = props.match.params.search&&props.match.params.search.length > 0;
+    const filter =
+      props.match.params.search && props.match.params.search.length > 0;
     return filter
       ? state.data.categoryData.searchResults
       : state.data.categoryData[props.match.params.id]
@@ -35,6 +37,8 @@ function Concepts(props) {
     (state: State) =>
       state.loading.getCategoryData || state.loading.getSearchResults
   );
+
+  const categories = useSelector((state: State) => state.data.categories);
 
   const onBack = () => props.history.goBack();
 
@@ -60,7 +64,7 @@ function Concepts(props) {
 
   useEffect(() => {
     let locationArray = props.match.params[0].split('/');
-    setBreadClumb([...locationArray]);
+    setBreadCrumb([...locationArray]);
   }, [props.match.params]);
 
   const onChangeSearch = (value: string) => {
@@ -70,7 +74,7 @@ function Concepts(props) {
   return (
     <ConceptsView
       data={{ ...data, formatedData } as CategoryData}
-      breadCrumb={breadClumb}
+      breadCrumb={getBreadcrumb(categories, [...breadCrumb])}
       onChangeSearch={onChangeSearch}
       filter={search}
       loading={loading}

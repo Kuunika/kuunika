@@ -5,7 +5,7 @@ import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import { PageHeading } from '../../components/PageHeading/PageHeading';
 import { State, Category as ICategory } from '../../services/utils/@types';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSubCategories } from '../../services/utils/helpers';
+import { getSubCategories, getBreadcrumb } from '../../services/utils/helpers';
 import { setActivePage } from '../../services/redux/actions/ui';
 import styled from 'styled-components';
 
@@ -26,8 +26,8 @@ function Category(props) {
       : category.categoryTitle;
     link =
       breadCrumb.length > 0
-        ? `/${breadCrumb.join('/')}/${link.toLowerCase().replace(' ', '-')}`
-        : `/${link.toLowerCase().replace(' ', '-')}`;
+        ? `/${breadCrumb.join('/')}/${link.toLowerCase().replace(/ /gi, '-')}`
+        : `/${link.toLowerCase().replace(/ /gi, '-')}`;
 
     props.history.push(link);
 
@@ -39,7 +39,7 @@ function Category(props) {
     const nextPageTitle =
       locationArray[1].length === 0
         ? 'All Categories'
-        : locationArray[1].replace('-', ' ');
+        : locationArray[1].replace(/-/gi, ' ');
 
     setPageTitle(nextPageTitle);
   }, [props.location.pathname]);
@@ -66,7 +66,7 @@ function Category(props) {
     <CategoryView
       pageTitle={pageTitle}
       data={data}
-      breadCrumb={breadCrumb}
+      breadCrumb={getBreadcrumb(categories, [...breadCrumb])}
       loading={loading}
     />
   );
