@@ -1,6 +1,5 @@
 import React, { useCallback, MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import Menu from './components/Menu';
 import { useDispatch } from 'react-redux';
 import { setActivePage } from '../../services/redux/actions/ui';
 import { theme } from '../../config/theme';
