@@ -1,0 +1,24 @@
+version: '3'
+services:
+  docker-redis:
+    container_name: docker-redis
+    image: redis
+    ports:
+        - '6379:6379'
+  app:
+    container_name: docker-terminology-api
+    restart: always
+    depends_on: [docker-redis]
+    image: docker-terminology-api
+    ports:
+      - '80:3333'
+    links:
+      - docker-redis
+    environment: []
+  redis-populator:
+    container_name: docker-redis-populator
+    image: redis-populator
+    restart: always
+    depends_on: [docker-redis]
+    links:
+      - docker-redis
