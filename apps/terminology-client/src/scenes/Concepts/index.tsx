@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import Table from './components/Table';
+import List from './components/List';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryData } from '../../services/redux/actions/data';
 import { State, CategoryData } from '../../services/utils/@types';
@@ -12,7 +13,7 @@ import {
   faCaretLeft
 } from '@fortawesome/free-solid-svg-icons';
 import ContentLoader from 'react-content-loader';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Hidden } from '@material-ui/core';
 import Btn from '../../components/Button';
 import { CSVLink } from 'react-csv';
 import { getBreadcrumb } from '../../services/utils/helpers';
@@ -140,7 +141,14 @@ export function ConceptsView({
       {loading ? (
         <LoadingConcepts />
       ) : (
-        <Table headings={data.sourceHeadings} data={data.formatedData} />
+        <>
+          <Hidden smDown>
+            <Table headings={data.sourceHeadings} data={data.formatedData} />
+          </Hidden>
+          <Hidden mdUp>
+            <List headings={data.sourceHeadings} data={data.formatedData} />
+          </Hidden>
+        </>
       )}
     </Wrapper>
   );
@@ -159,15 +167,22 @@ const Wrapper = styled.div`
   padding: 2rem;
   border-radius: 15px;
   margin-top: 2rem;
+  @media (max-width: 460px) {
+    padding: 0rem;
+    background: transparent;
+  }
 `;
 
 const TableTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 690px) {
+    display: block;
+  }
 `;
 const InputGroup = styled.div`
-  width: 35%;
+  width: 260px;
   border-radius: 1.5rem;
   box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
@@ -175,6 +190,10 @@ const InputGroup = styled.div`
   display: flex;
   background: white;
   height: 2.5rem;
+  @media (max-width: 690px) {
+    width: 100%;
+  }
+  margin-bottom: 1rem;
 `;
 
 const Input = styled.input`
@@ -185,7 +204,7 @@ const Input = styled.input`
   padding: 0.2rem;
   padding-left: 1.5rem;
   font-size: 1rem;
-  width: 82.5%;
+  width: 80%;
   border-radius: 1.5rem 0rem 0rem 1.5rem;
 `;
 

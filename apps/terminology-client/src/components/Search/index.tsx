@@ -109,13 +109,16 @@ const Wrapper = styled.div`
 `;
 
 const InputGroup = styled.div`
-  width: 35%;
+  width: 320px;
   border-radius: 1.5rem;
   box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   display: flex;
   background: white;
+  @media (max-width: 390) {
+    width: 100%;
+  }
 `;
 
 const Input = styled.input`

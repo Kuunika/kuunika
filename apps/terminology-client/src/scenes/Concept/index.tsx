@@ -102,6 +102,10 @@ const Wrapper = styled.div`
   padding: 2rem;
   border-radius: 15px;
   margin-top: 2rem;
+  @media (max-width: 460px) {
+    padding: 0rem;
+    background: transparent;
+  }
 `;
 
 const BreadCrumb = styled.div`

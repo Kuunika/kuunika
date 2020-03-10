@@ -28,16 +28,18 @@ function SearchResultItem({
     <Wrapper data-testid="search-result-item">
       <Category>
         Category: <i>{categoryBreadcrumb}</i>
-        <p>{numberOfResults} records found</p>
+        <Footer>
+          <p>{numberOfResults} records found</p>
+          <Btn
+            style={{ width: '8rem', height: '2.5rem' }}
+            onClick={onClick}
+            data-testid="search-result-btn"
+          >
+            {' '}
+            View{' '}
+          </Btn>
+        </Footer>
       </Category>
-      <Btn
-        style={{ width: '8rem', height: '2.5rem' }}
-        onClick={onClick}
-        data-testid="search-result-btn"
-      >
-        {' '}
-        View{' '}
-      </Btn>
     </Wrapper>
   );
 }
@@ -54,15 +56,29 @@ const Wrapper = styled.div`
   margin: 1rem;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0rem;
+`;
+
 const Category = styled.div`
   text-align: left;
+  width: 100%;
   margin: 0rem 1.5rem;
-  margin-right: 3rem;
   font-size: 1.5rem;
   color: ${theme.darkColor};
   font-weight: 550;
   p {
     font-size: 1.2rem;
     color: gray;
+  }
+  @media (max-width: 460px) {
+    font-size: 1rem;
+    margin-right: 1rem;
+    p {
+      font-size: 0.8rem;
+    }
   }
 `;

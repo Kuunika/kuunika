@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { environment } from '../../environments/environment';
 
-const API_ENDPOINT = 'http://localhost:3333/api/v0';
+const API_ENDPOINT = environment.api.apiEndpoint;
 export default {
   getCategories: () => {
     const url = `${API_ENDPOINT}/categories`;
