@@ -68,6 +68,9 @@ const Content = styled.p`
   font-weight: bold;
   color: gray;
   min-height: 92px;
+  @media (max-width: 460px) {
+    font-size: 1rem;
+  }
 `;
 
 const More = styled.span`

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../config/theme';
 import { Link } from 'react-router-dom';
+import { Hidden } from '@material-ui/core';
 
 function CategoryBreadCrumb({ data }: Props) {
   const getLink = index => {
@@ -15,7 +16,9 @@ function CategoryBreadCrumb({ data }: Props) {
 
   return (
     <Wrapper data-testid="breadcrumb">
-      <b>Category: </b>
+      <Hidden smDown>
+        <b>Category: </b>
+      </Hidden>
       {data.map((text, index) => {
         text = text.replace(/-/gi, ' ');
         return index < data.length - 1 ? (
@@ -46,6 +49,9 @@ const Wrapper = styled.h2`
   font-size: 1.8rem;
   font-weight: 550;
   display: inline-block;
+  @media (max-width: 460px) {
+    font-size: 1.3rem;
+  }
 `;
 const Location = styled.i`
   cursor: pointer;
@@ -57,4 +63,7 @@ const Separator = styled.i`
   }
   font-size: 2rem;
   margin: 0rem 0.2rem;
+  @media (max-width: 460px) {
+    font-size: 1.5rem;
+  }
 `;

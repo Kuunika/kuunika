@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Grid, Hidden, Paper, Button } from '@material-ui/core';
 
 import SideBar from '../components/SideBar';
+import Heading from '../components/Heading';
 
 import Page from '../Routes';
 import { useDispatch } from 'react-redux';
@@ -40,6 +41,11 @@ export const AppView = () => {
         <Hidden smDown>
           <Grid item xs={12} sm={12} md={2} lg={2}>
             <SideBar />
+          </Grid>
+        </Hidden>
+        <Hidden mdUp>
+          <Grid item xs={12} sm={12} md={2} lg={2}>
+            <Heading />
           </Grid>
         </Hidden>
         <Grid item xs={12} sm={12} md={10} lg={10}>
