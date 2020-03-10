@@ -19,11 +19,17 @@
     },
     "terminology-client-e2e": {
       "tags": [],
-      "implicitDependencies": ["terminology-client"],
-    "terminology-redis": {
-      "tags": []
+      "implicitDependencies": [
+        "terminology-client"
+      ],
+      "terminology-redis": {
+        "tags": []
+      },
+      "redis-connection": {
+        "tags": []
+      }
     },
-    "redis-connection": {
+    "product-master-redis": {
       "tags": []
     }
   }

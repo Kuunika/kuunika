@@ -14,7 +14,9 @@
             "outputPath": "dist/apps/terminology-api",
             "main": "apps/terminology-api/src/main.ts",
             "tsConfig": "apps/terminology-api/tsconfig.app.json",
-            "assets": ["apps/terminology-api/src/assets"]
+            "assets": [
+              "apps/terminology-api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -45,7 +47,10 @@
               "apps/terminology-api/tsconfig.app.json",
               "apps/terminology-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/terminology-api/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/terminology-api/**"
+            ]
           }
         },
         "test": {
@@ -124,7 +129,10 @@
               "apps/terminology-client/tsconfig.app.json",
               "apps/terminology-client/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/terminology-client/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/terminology-client/**"
+            ]
           }
         },
         "test": {
@@ -159,8 +167,13 @@
           "options": {
             "linter": "eslint",
             "config": "apps/terminology-client-e2e/.eslintrc",
-            "tsConfig": ["apps/terminology-client-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/terminology-client-e2e/**"]
+            "tsConfig": [
+              "apps/terminology-client-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/terminology-client-e2e/**"
+            ]
           }
         }
       }
@@ -178,7 +191,9 @@
             "outputPath": "dist/apps/terminology-redis",
             "main": "apps/terminology-redis/src/main.ts",
             "tsConfig": "apps/terminology-redis/tsconfig.app.json",
-            "assets": ["apps/terminology-redis/src/assets"]
+            "assets": [
+              "apps/terminology-redis/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -209,7 +224,10 @@
               "apps/terminology-redis/tsconfig.app.json",
               "apps/terminology-redis/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/terminology-redis/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/terminology-redis/**"
+            ]
           }
         },
         "test": {
@@ -234,7 +252,10 @@
               "libs/redis-connection/tsconfig.lib.json",
               "libs/redis-connection/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/redis-connection/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/redis-connection/**"
+            ]
           }
         },
         "test": {
@@ -242,6 +263,67 @@
           "options": {
             "jestConfig": "libs/redis-connection/jest.config.js",
             "tsConfig": "libs/redis-connection/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "product-master-redis": {
+      "root": "apps/product-master-redis",
+      "sourceRoot": "apps/product-master-redis/src",
+      "projectType": "application",
+      "prefix": "product-master-redis",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/product-master-redis",
+            "main": "apps/product-master-redis/src/main.ts",
+            "tsConfig": "apps/product-master-redis/tsconfig.app.json",
+            "assets": [
+              "apps/product-master-redis/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/product-master-redis/src/environments/environment.ts",
+                  "with": "apps/product-master-redis/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "product-master-redis:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/product-master-redis/.eslintrc",
+            "tsConfig": [
+              "apps/product-master-redis/tsconfig.app.json",
+              "apps/product-master-redis/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/product-master-redis/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/product-master-redis/jest.config.js",
+            "tsConfig": "apps/product-master-redis/tsconfig.spec.json"
           }
         }
       }
