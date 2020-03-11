@@ -27,6 +27,7 @@
     "terminology-api": "nx serve terminology-api",
     "terminology-client": "nx serve terminology-client",
     "terminology-redis": "nx serve terminology-redis",
+    "product-master-api": "nx serve product-master-api",
     "product-master-redis": "nx serve product-master-redis"
   },
   "private": true,

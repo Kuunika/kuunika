@@ -19,9 +19,7 @@
     },
     "terminology-client-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "terminology-client"
-      ],
+      "implicitDependencies": ["terminology-client"],
       "terminology-redis": {
         "tags": []
       },
@@ -30,6 +28,15 @@
       }
     },
     "product-master-redis": {
+      "tags": []
+    },
+    "product-master-api": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "product-master-interfaces": {
       "tags": []
     }
   }

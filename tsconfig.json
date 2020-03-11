@@ -19,7 +19,11 @@
       "@kuunika/terminology-interfaces": [
         "libs/terminology-interfaces/src/index.ts"
       ],
-      "@kuunika/redis-connection": ["libs/redis-connection/src/index.ts"]
+      "@kuunika/redis-connection": ["libs/redis-connection/src/index.ts"],
+      "@kuunika/ui": ["libs/ui/src/index.ts"],
+      "@kuunika/product-master-interfaces": [
+        "libs/product-master-interfaces/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
