@@ -76,7 +76,7 @@ function createDhisDataElements(dhis2ProductMasterConcepts: DhisProductMasterOcl
 }
 
 async function main(){
-    RedisSingleton.getInstance(6379,'0.0.0.0');
+    RedisSingleton.getInstance(parseInt(process.env.REDIS_PORT),process.env.REDIS_HOST);
     console.log('Connection to Redis Successful');
     console.log('Now Clearing Cache');
     RedisSingleton.flushAll();

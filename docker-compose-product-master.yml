@@ -1,0 +1,23 @@
+version: '3'
+services: 
+    docker-redis:
+        container_name: docker-redis
+        image: redis
+        ports: 
+            - '6379:6379'
+    docker-product-master-redis:
+        container_name: docker-product-master-redis
+        restart: always
+        depends_on: [docker-redis]
+        image: product-master-redis-docker
+        links: 
+            - docker-redis
+    docker-product-master-api:
+        container_name: docker-product-master-api
+        restart: always
+        depends_on: [docker-redis]
+        image: product-master-api-docker 
+        links: 
+            - docker-redis
+        ports: 
+            - '80:3333'
