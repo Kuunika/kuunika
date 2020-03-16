@@ -100,6 +100,85 @@ In the root directory of the project run the following command and the frontend 
 npm run terminology-client
 ```
 
+## Docker Installation 
+
+### Step 1: Clone Repo
+
+Clone this repository into your local directory, Use the command below:
+
+```bash
+# Clone project to a computer
+git clone https://github.com/Kuunika/kuunika
+
+# Navigate to the project root directory
+cd kuunika
+```
+
+### Step 2: Create/Edit .ENV File
+
+Copy and Rename the .env.example to .env, next modifiy the file.
+
+```shell
+# API key used to make request to the OCL API Service
+OCL_API_KEY='*'
+
+OCL_API='*' #Base URL Of OCL or URL of internally hosted instance of OCL, ex https://api.openconceptlab.org/
+
+OCL_CATEGORIES_API_URL='*' #URL of Source containing categories data that the api will route requests, ex: orgs/:OrgName/sources/:SampleSourceName/
+
+# ignore the following for the deploment of terminology service
+OCL_PRODUCT_MASTER_SOURCE=''
+OCL_PRODUCT_MASTER_DHIS2=''
+OCL_PRODUCT_MASTER_DHAMIS=''
+OCL_PRODUCT_MASTER_OPENLMIS=''
+# end of the ignored ENVs
+
+REDIS_HOST=* #Address of Redis instance host
+
+REDIS_PORT='6379' #Port used to access redis. Default port 6379
+```
+
+
+
+### Step 3: Building Map Files for 
+
+```shell
+# Creating Terminology-Api Map Files
+nx build terminology-api
+
+# Creating Terminology-Redis Map Files
+nx build terminology-redis
+
+# Creating Terminology-Client Map Files
+nx build terminology-client
+```
+
+
+
+### Step 4: Build Docker Images
+
+```shell
+# Creating Terminology-Api Image
+docker image build -t docker-terminology-api -f terminology-api.Dockerfile .
+
+# Creating Terminology-Redis Image
+docker image build -t docker-terminology-redis -f terminology-redis.Dockerfile .
+
+# Creating Terminology-client Image
+docker image build -t docker-terminology-client -f terminology-client.Dockerfile .
+```
+
+
+
+### Step 5: Run Docker Compose
+
+```shell
+#
+docker-compose up
+```
+
+
+
 
 
 # Further Help

@@ -1,4 +1,4 @@
-FROM node:10 as building
+FROM node:10-alpine as building
 RUN mkdir html
 WORKDIR /html
 COPY ./dist/apps/terminology-client .

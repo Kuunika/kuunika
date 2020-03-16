@@ -15,16 +15,16 @@ services:
     links:
       - docker-redis
     environment: []
-  redis-populator:
-    container_name: docker-redis-populator
-    image: redis-populator
+  docker-terminology-redis:
+    container_name: docker-terminology-redis
+    image: docker-terminology-redis
     restart: always
     depends_on: [docker-redis]
     links:
       - docker-redis
   docker-terminology-client:
     container_name: docker-terminology-client
-    image: terminology-client
+    image: docker-terminology-client
     restart: always
     depends_on: [docker-terminology-api]
     ports:
