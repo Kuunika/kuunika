@@ -2,27 +2,54 @@ import React, {
   useState,
   MouseEvent,
   MouseEventHandler,
-  FocusEventHandler
+  FocusEventHandler,
+  useEffect,
+  KeyboardEventHandler,
+  useRef
 } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import SearchResults from './components/SearchResults';
+import {
+  searchConcept,
+  setSearchValue
+} from '../../services/redux/actions/data';
+import { setSearchResultsState } from '../../services/redux/actions/ui';
+import { debounce } from 'lodash';
+import { State } from '../../services/utils/@types';
 
 function Search() {
-  const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState('');
-  const handleClickAway = () => setOpen(false);
-  const onFocus = () => setOpen(true);
+  const open = useSelector((state: State) => state.ui.searchResults);
+
+  const searchValue = useSelector(
+    (state: State) => state.data.search.searchTerm
+  );
+
+  const dispatch = useDispatch();
+
+  const handleClickAway = () => dispatch(setSearchResultsState(false));
+  const onFocus = () => dispatch(setSearchResultsState(true));
+
+  const onChange = (value = '') => {
+    dispatch(setSearchValue(value));
+    search(value);
+  };
+  const search = useRef(
+    debounce(value => {
+      dispatch(searchConcept(value));
+    }, 800)
+  ).current;
 
   return (
     <SearchView
       searchOpen={open}
       handleClickAway={handleClickAway}
       onFocus={onFocus}
-      search={search}
-      onChange={setSearch}
+      searchValue={searchValue}
+      onChange={onChange}
     />
   );
 }
@@ -35,16 +62,19 @@ export function SearchView(props: ViewProps) {
       <Wrapper>
         <InputGroup>
           <Input
+            data-testid="search-box"
             placeholder="Search"
             onFocus={props.onFocus as FocusEventHandler<any>}
             onChange={e => props.onChange(e.target.value)}
-            value={props.search}
+            value={props.searchValue}
           ></Input>
           <Addon>
-            {props.searchOpen && props.search.length > 0 ? (
+            {props.searchOpen && props.searchValue.length > 0 ? (
               <FontAwesomeIcon
                 icon={faTimes}
-                onClick={props.handleClickAway as MouseEventHandler<any>}
+                onClick={e => {
+                  props.onChange(), props.handleClickAway(e as MouseEvent<any>);
+                }}
               />
             ) : (
               <FontAwesomeIcon
@@ -55,7 +85,7 @@ export function SearchView(props: ViewProps) {
           </Addon>
         </InputGroup>
 
-        <SearchResults open={props.searchOpen && props.search.length > 0} />
+        <SearchResults open={props.searchOpen} />
       </Wrapper>
     </ClickAwayListener>
   );
@@ -65,7 +95,7 @@ interface ViewProps {
   searchOpen: boolean;
   handleClickAway: (event: MouseEvent<Document>) => void;
   onFocus: Function;
-  search: string;
+  searchValue: string;
   onChange: Function;
 }
 
@@ -75,16 +105,20 @@ const Wrapper = styled.div`
   justify-content: center;
   position: relative;
   align-items: center;
+  margin-bottom: 1rem;
 `;
 
 const InputGroup = styled.div`
-  width: 35%;
+  width: 320px;
   border-radius: 1.5rem;
   box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
   display: flex;
   background: white;
+  @media (max-width: 390) {
+    width: 100%;
+  }
 `;
 
 const Input = styled.input`

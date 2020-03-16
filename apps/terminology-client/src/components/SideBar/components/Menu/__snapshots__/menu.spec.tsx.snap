@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu should render all menu items 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-htpNat jmINdp"
+      data-testid="menu-container"
+    >
+      <a
+        data-testid="menu-clinical"
+        href="/clinical"
+        style="text-decoration: none;"
+      >
+        <div
+          class="sc-bdVaJa lmvtnY"
+        >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-ambulance"
+            />
+          </div>
+          Clinical
+        </div>
+      </a>
+      <a
+        data-testid="menu-Menu2"
+        href="/menu2"
+        style="text-decoration: none;"
+      >
+        <div
+          class="sc-bdVaJa jWaYE"
+        >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-user-md"
+            />
+          </div>
+          Menu2
+        </div>
+      </a>
+      <a
+        data-testid="menu-Menu3"
+        href="/menu3"
+        style="text-decoration: none;"
+      >
+        <div
+          class="sc-bdVaJa jWaYE"
+        >
+          <div
+            class="sc-bwzfXH Sidpp"
+          >
+            <i
+              class="fas fa-pills"
+            />
+          </div>
+          Menu3
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+`;

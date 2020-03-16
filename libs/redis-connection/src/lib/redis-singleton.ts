@@ -6,12 +6,15 @@ export class RedisSingleton {
 
     private constructor() { }
 
-    static getInstance(port = 6379, host = '0.0.0.0'): redis.RedisClient {
+    static getInstance(port = 6379, host = 'docker-redis'): redis.RedisClient {
+        
         if (!RedisSingleton.redisStoreInstance) {
             RedisSingleton.redisStoreInstance = redis.createClient(port, host);
             
             RedisSingleton.redisStoreInstance.on('connect', () => console.log('Connection to Redis is successful'));
             this.redisStoreInstance.on('error', (err)=> {
+                console.log(port, host);
+                console.log(err.message);
                 console.log('Redis is OFFLINE, now using appropriate contingencies');
             });
         }

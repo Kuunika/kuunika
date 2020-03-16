@@ -6,4 +6,7 @@ export const PageHeading = styled.h1`
   color: ${theme.darkColor};
   font-size: 3rem;
   text-transform: capitalize;
+  @media (max-width: 460px) {
+    font-size: 2rem;
+  }
 `;

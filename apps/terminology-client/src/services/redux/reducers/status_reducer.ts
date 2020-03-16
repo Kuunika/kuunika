@@ -1,9 +1,10 @@
 // @ts-ignore
-import { join, split, camelCase } from "lodash";
+import { join, split, camelCase } from 'lodash';
+
 export default (state = {}, action: any) => {
   let actionGroup = join(
-    split(action.type, "_", split(action.type, "_").length - 1),
-    "_"
+    split(action.type, '_', split(action.type, '_').length - 1),
+    '_'
   );
   let formattedActionGroup = camelCase(actionGroup);
   switch (action.type) {

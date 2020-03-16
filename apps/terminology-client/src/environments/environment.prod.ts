@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  api: {
+    apiEndpoint: 'http://docker-terminology-api:3333/api/v0'
+  }
 };

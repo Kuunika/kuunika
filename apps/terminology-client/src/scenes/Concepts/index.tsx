@@ -2,23 +2,46 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CategoryBreadCrumb from '../../components/CategoryBreadCrumb';
 import Table from './components/Table';
+import List from './components/List';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryData } from '../../services/redux/actions/data';
 import { State, CategoryData } from '../../services/utils/@types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes,
+  faSearch,
+  faCaretLeft
+} from '@fortawesome/free-solid-svg-icons';
+import ContentLoader from 'react-content-loader';
+import { CircularProgress, Hidden } from '@material-ui/core';
+import Btn from '../../components/Button';
+import { CSVLink } from 'react-csv';
+import { getBreadcrumb } from '../../services/utils/helpers';
 
 function Concepts(props) {
   const dispatch = useDispatch();
-  const [breadClumb, setBreadClumb] = useState([]);
+  const [breadCrumb, setBreadCrumb] = useState([]);
   const [search, setSearch] = useState('');
   const [formatedData, setFormatedData] = useState([]);
 
   const data = useSelector((state: State) => {
-    return state.data.categoryData[props.match.params.id]
+    const filter =
+      props.match.params.search && props.match.params.search.length > 0;
+    return filter
+      ? state.data.categoryData.searchResults
+      : state.data.categoryData[props.match.params.id]
       ? state.data.categoryData[props.match.params.id]
       : state.data.categoryData['default'];
   });
+
+  const loading = useSelector(
+    (state: State) =>
+      state.loading.getCategoryData || state.loading.getSearchResults
+  );
+
+  const categories = useSelector((state: State) => state.data.categories);
+
+  const onBack = () => props.history.goBack();
 
   useEffect(() => {
     const dt = data.results.filter(t => {
@@ -30,13 +53,19 @@ function Concepts(props) {
   }, [search, data]);
 
   useEffect(() => {
+    if (props.match.params.search) {
+      dispatch(
+        getCategoryData(props.match.params.id, props.match.params.search)
+      );
+      return;
+    }
     if (props.match.params.id && data.results.length == 0)
       dispatch(getCategoryData(props.match.params.id));
   }, [props.match.params]);
 
   useEffect(() => {
     let locationArray = props.match.params[0].split('/');
-    setBreadClumb([...locationArray]);
+    setBreadCrumb([...locationArray]);
   }, [props.match.params]);
 
   const onChangeSearch = (value: string) => {
@@ -46,22 +75,43 @@ function Concepts(props) {
   return (
     <ConceptsView
       data={{ ...data, formatedData } as CategoryData}
-      breadCrumb={breadClumb}
+      breadCrumb={getBreadcrumb(categories, [...breadCrumb])}
       onChangeSearch={onChangeSearch}
       filter={search}
+      loading={loading}
+      onBack={onBack}
     />
   );
 }
 
 export default Concepts;
-
-function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
+export const LoadingConcepts = () => (
+  <LoaderContainer>
+    <CircularProgress />
+  </LoaderContainer>
+);
+export function ConceptsView({
+  data,
+  breadCrumb,
+  onChangeSearch,
+  filter,
+  loading,
+  onBack
+}: ViewProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="concepts-table">
+      <Btn
+        onClick={onBack}
+        theme="default"
+        icon={<FontAwesomeIcon icon={faCaretLeft} />}
+      >
+        BACK
+      </Btn>
       <TableTitleContainer>
         <CategoryBreadCrumb data={breadCrumb} />
         <InputGroup>
           <Input
+            data-testid="table-search"
             placeholder="Search"
             value={filter}
             onChange={e => onChangeSearch(e.target.value)}
@@ -80,8 +130,26 @@ function ConceptsView({ data, breadCrumb, onChangeSearch, filter }: ViewProps) {
           </Addon>
         </InputGroup>
       </TableTitleContainer>
-
-      <Table headings={data.sourceHeadings} data={data.formatedData} />
+      <DownloadContainer>
+        <CSVLink
+          data={data.formatedData}
+          filename={`Terminologies_${new Date().toDateString()}.csv`}
+        >
+          <Btn theme="success">Download</Btn>
+        </CSVLink>
+      </DownloadContainer>
+      {loading ? (
+        <LoadingConcepts />
+      ) : (
+        <>
+          <Hidden smDown>
+            <Table headings={data.sourceHeadings} data={data.formatedData} />
+          </Hidden>
+          <Hidden mdUp>
+            <List headings={data.sourceHeadings} data={data.formatedData} />
+          </Hidden>
+        </>
+      )}
     </Wrapper>
   );
 }
@@ -91,21 +159,30 @@ interface ViewProps {
   breadCrumb: Array<string>;
   onChangeSearch: Function;
   filter: string;
+  loading: boolean;
+  onBack: Function;
 }
 const Wrapper = styled.div`
   background: #f4f4f4;
   padding: 2rem;
   border-radius: 15px;
   margin-top: 2rem;
+  @media (max-width: 460px) {
+    padding: 0rem;
+    background: transparent;
+  }
 `;
 
 const TableTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 690px) {
+    display: block;
+  }
 `;
 const InputGroup = styled.div`
-  width: 35%;
+  width: 260px;
   border-radius: 1.5rem;
   box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
     0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
@@ -113,6 +190,10 @@ const InputGroup = styled.div`
   display: flex;
   background: white;
   height: 2.5rem;
+  @media (max-width: 690px) {
+    width: 100%;
+  }
+  margin-bottom: 1rem;
 `;
 
 const Input = styled.input`
@@ -123,7 +204,7 @@ const Input = styled.input`
   padding: 0.2rem;
   padding-left: 1.5rem;
   font-size: 1rem;
-  width: 82.5%;
+  width: 80%;
   border-radius: 1.5rem 0rem 0rem 1.5rem;
 `;
 
@@ -138,4 +219,18 @@ const Addon = styled.div`
   border-radius: 0rem 1.5rem 1.5rem 0rem;
   color: gray;
   cursor: pointer;
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  min-height: 40rem;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DownloadContainer = styled.div`
+  text-align: right;
+  a {
+    text-decoration: none;
+  }
 `;

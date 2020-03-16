@@ -1,11 +1,14 @@
 export interface UIState {
   activePage: string;
+  searchResults: Boolean;
 }
 
 export interface Category {
   categoryTitle: string;
   id: null | string | number;
   categories: Array<Category>;
+  description: string;
+  icons?: Array<string>;
 }
 
 export interface CategoryData {
@@ -14,6 +17,16 @@ export interface CategoryData {
   formatedData?: Array<any>;
 }
 
+export interface ISearchCategory {
+  categoryBreadcrumb: string;
+  numberOfResults: number | string;
+  sourceId: string;
+  searchTerm?: string;
+}
+export interface ISearch {
+  searchTerm: string;
+  searchResults: Array<ISearchCategory>;
+}
 export interface Concept {
   id: number | string | null;
   headings: Array<{ title: string; value: string }>;
@@ -24,11 +37,20 @@ export interface IData {
   categories: Array<Category>;
   categoryData: { [key: string]: CategoryData };
   concept: { [key: string]: Concept };
+  search: ISearch;
+}
+
+export interface IError {
+  status: Number;
+  message: string;
+}
+export interface IErrors {
+  [key: string]: IError | any;
 }
 
 export interface State {
   ui: UIState;
   data: IData;
-  errors: any;
+  errors: IErrors;
   loading: any;
 }

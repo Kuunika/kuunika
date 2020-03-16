@@ -10,7 +10,7 @@ function Body({ data }: Props) {
     <Wrapper>
       <Heading>Description</Heading>
       {data.map(d => (
-        <div key={d.title}>
+        <div key={d.title} data-testid="description-body">
           <Title>{d.title}: </Title>
           <p>{d.value}</p>
         </div>

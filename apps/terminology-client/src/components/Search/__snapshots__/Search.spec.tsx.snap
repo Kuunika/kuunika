@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Global Search should render search component 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-ifAKCX eBsEho"
+    >
+      <div
+        class="sc-EHOje bIBWcz"
+      >
+        <input
+          class="sc-bZQynM iWWDmP"
+          data-testid="search-box"
+          placeholder="Search"
+          value=""
+        />
+        <div
+          class="sc-gzVnrw hUcRQU"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-search fa-w-16 "
+            data-icon="search"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Global Search should render search component open search results 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-ifAKCX eBsEho"
+    >
+      <div
+        class="sc-EHOje bIBWcz"
+      >
+        <input
+          class="sc-bZQynM iWWDmP"
+          data-testid="search-box"
+          placeholder="Search"
+          value="hello"
+        />
+        <div
+          class="sc-gzVnrw hUcRQU"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-times fa-w-11 "
+            data-icon="times"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 352 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Global Search should renders search results 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bxivhb gWqXUR"
+      data-testid="search-container"
+    >
+      <div
+        class="sc-bwzfXH eowHNW"
+        data-testid="search-result-item"
+      >
+        <div
+          class="sc-htpNat bNhkzF"
+        >
+          Category: 
+          <i>
+            /clinical
+          </i>
+          <p>
+            18
+             records found
+          </p>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-1 MuiButton-contained"
+          data-testid="search-result-btn"
+          style="width: 8rem; height: 2.5rem;"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+             
+            View
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="sc-bwzfXH eowHNW"
+        data-testid="search-result-item"
+      >
+        <div
+          class="sc-htpNat bNhkzF"
+        >
+          Category: 
+          <i>
+            /clinicael
+          </i>
+          <p>
+            14
+             records found
+          </p>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-34 MuiButton-contained"
+          data-testid="search-result-btn"
+          style="width: 8rem; height: 2.5rem;"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+             
+            View
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Global Search should show loading state 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bxivhb gWqXUR"
+      data-testid="search-container"
+    >
+      <div>
+        <div
+          class="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate"
+          role="progressbar"
+        >
+          <div
+            class="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"
+          />
+          <div
+            class="MuiLinearProgress-bar MuiLinearProgress-bar2Indeterminate MuiLinearProgress-barColorPrimary"
+          />
+        </div>
+      </div>
+      <div
+        class="sc-bwzfXH eowHNW"
+        data-testid="search-result-item"
+      >
+        <div
+          class="sc-htpNat bNhkzF"
+        >
+          Category: 
+          <i>
+            /clinical
+          </i>
+          <p>
+            18
+             records found
+          </p>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-66 MuiButton-contained"
+          data-testid="search-result-btn"
+          style="width: 8rem; height: 2.5rem;"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+             
+            View
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="sc-bwzfXH eowHNW"
+        data-testid="search-result-item"
+      >
+        <div
+          class="sc-htpNat bNhkzF"
+        >
+          Category: 
+          <i>
+            /clinicael
+          </i>
+          <p>
+            14
+             records found
+          </p>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-99 MuiButton-contained"
+          data-testid="search-result-btn"
+          style="width: 8rem; height: 2.5rem;"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+             
+            View
+             
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Global Search should show no results on empty 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bxivhb gWqXUR"
+      data-testid="search-container"
+    >
+      <div>
+        No results for search
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Global Search should show no results on error 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bxivhb gWqXUR"
+      data-testid="search-container"
+    >
+      <div>
+        No results for search
+      </div>
+      <div>
+        Error
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -245,6 +245,171 @@
           }
         }
       }
+    },
+    "product-master-redis": {
+      "root": "apps/product-master-redis",
+      "sourceRoot": "apps/product-master-redis/src",
+      "projectType": "application",
+      "prefix": "product-master-redis",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/product-master-redis",
+            "main": "apps/product-master-redis/src/main.ts",
+            "tsConfig": "apps/product-master-redis/tsconfig.app.json",
+            "assets": ["apps/product-master-redis/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/product-master-redis/src/environments/environment.ts",
+                  "with": "apps/product-master-redis/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "product-master-redis:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/product-master-redis/.eslintrc",
+            "tsConfig": [
+              "apps/product-master-redis/tsconfig.app.json",
+              "apps/product-master-redis/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/product-master-redis/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/product-master-redis/jest.config.js",
+            "tsConfig": "apps/product-master-redis/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "product-master-api": {
+      "root": "apps/product-master-api",
+      "sourceRoot": "apps/product-master-api/src",
+      "projectType": "application",
+      "prefix": "product-master-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/product-master-api",
+            "main": "apps/product-master-api/src/main.ts",
+            "tsConfig": "apps/product-master-api/tsconfig.app.json",
+            "assets": ["apps/product-master-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/product-master-api/src/environments/environment.ts",
+                  "with": "apps/product-master-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "product-master-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/product-master-api/.eslintrc",
+            "tsConfig": [
+              "apps/product-master-api/tsconfig.app.json",
+              "apps/product-master-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/product-master-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/product-master-api/jest.config.js",
+            "tsConfig": "apps/product-master-api/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/tsconfig.lib.json",
+              "libs/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "tsConfig": "libs/ui/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "product-master-interfaces": {
+      "root": "libs/product-master-interfaces",
+      "sourceRoot": "libs/product-master-interfaces/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/product-master-interfaces/tsconfig.lib.json",
+              "libs/product-master-interfaces/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/product-master-interfaces/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/product-master-interfaces/jest.config.js",
+            "tsConfig": "libs/product-master-interfaces/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -20,10 +20,23 @@
     "terminology-client-e2e": {
       "tags": [],
       "implicitDependencies": ["terminology-client"],
-    "terminology-redis": {
+      "terminology-redis": {
+        "tags": []
+      },
+      "redis-connection": {
+        "tags": []
+      }
+    },
+    "product-master-redis": {
       "tags": []
     },
-    "redis-connection": {
+    "product-master-api": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "product-master-interfaces": {
       "tags": []
     }
   }

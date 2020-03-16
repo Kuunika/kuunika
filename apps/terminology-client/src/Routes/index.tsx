@@ -7,6 +7,7 @@ import Concept from '../scenes/Concept';
 function Page() {
   return (
     <Switch>
+      <Route exact path="/*/view/search/:id/:search" component={Concepts} />
       <Route exact path="/*/view/:id" component={Concepts} />
       <Route exact path="/*/view/:id/:conceptId" component={Concept} />
       <Route exact path="/*" component={Category} />

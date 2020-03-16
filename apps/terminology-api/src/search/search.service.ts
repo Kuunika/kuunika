@@ -89,9 +89,9 @@ export class SearchService {
   ) {
     const options = {
       shouldSort: true,
-      threshold: 0.6,
+      threshold: 0.3,
       location: 0,
-      distance: 50,
+      distance: 40,
       maxPatternLength: 40,
       minMatchCharLength: 20,
       keys

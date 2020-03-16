@@ -54,6 +54,7 @@ async function cacheConceptsFromCategories(){
 }
 
 async function main(){
+    RedisSingleton.getInstance(parseInt(process.env.PORT), process.env.REDIS_HOST);
     console.log('Connection to redis successful');
     console.log('Now clearing cache');
     RedisSingleton.flushAll();

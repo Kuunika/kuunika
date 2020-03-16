@@ -2,7 +2,8 @@ import actions from '../actions/actions';
 import { UIState } from '../../utils/@types';
 
 const initialState = {
-  activePage: 'clinical'
+  activePage: 'clinical',
+  searchResults: false
 } as UIState;
 export default (
   state = initialState,
@@ -13,6 +14,11 @@ export default (
       return {
         ...state,
         activePage: action.payload
+      };
+    case actions.setSearchResultsState:
+      return {
+        ...state,
+        searchResults: action.payload
       };
     default:
       return state;

@@ -1,76 +1,200 @@
-# Kuunika
+# Kuunika - Mono Repo
 
-This project was generated using [Nx](https://nx.dev).
+This repo hosts a number of Kuunika projects and was generated using [Nx](https://nx.dev/) to help manage the mono repo architecture. 
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
-## Adding capabilities to your workspace
+## Table of Contents
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+- Terminology Service Dashboard
+- Further Help
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-Below are some plugins which you can add to your workspace:
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+# Terminology Service Dashboard
 
-## Generate an application
+## Dependencies
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+- [NodeJS > v10.15.0](https://nodejs.org/en/download/)
+- [Redis > 5.0.7](https://redis.io/download)
 
-> You can use any of the plugins above to generate applications as well.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
 
-## Generate a library
+## Setup
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+This project uses NestJs for its api backend and ReactJs for front end. Click the following link to thier respective documentation for more information on [NestJs](https://docs.nestjs.com/) and [ReactJS](https://reactjs.org/docs/getting-started.html) .
 
-> You can also use any of the plugins above to generate libraries as well.
+This installation guide assumes that you have read and setup Open Concept Lab according to the guide provided in the Kuunika Repos [Wiki](https://github.com/Kuunika/kuunika/wiki/Terminology-Service-Dashboard---Configuring-Open-Concept-Lab).
 
-Libraries are sharable across libraries and applications. They can be imported from `@kuunika/mylib`.
 
-## Development server
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+#### Step 1: Clone Repo
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Clone this repository into your local directory, Use the command below:
 
-## Build
+```bash
+# Clone project to a computer
+git clone https://github.com/Kuunika/kuunika
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# Navigate to the project root directory
+cd kuunika
+```
 
-## Running unit tests
+#### Step 2: Install Dependencies
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+In the root directory of the project run the following command
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+```bash
+# install all dependancies
+npm install
+```
 
-## Running end-to-end tests
+#### Step 3: Run Tests
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+```shell
+# install all dependancies
+npm run test
+```
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+#### Step 4: Edit Env File
 
-## Understand your workspace
+In the root directory there exist a file named *'.env.example'* create a copy of this file, rename the copy to *'.env'* and open it to edit the contents.
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+```bash
+# API key used to make request to the OCL API Service
+OCL_API_KEY='*'
 
-## Further help
+OCL_API='*' #Base URL Of OCL or URL of internally hosted instance of OCL, ex https://api.openconceptlab.org/
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+OCL_CATEGORIES_API_URL='*' #URL of Source containing categories data that the api will route requests, ex: orgs/:OrgName/sources/:SampleSourceName/
+
+REDIS_HOST=* #Address of Redis instance host
+
+REDIS_PORT='6379' #Port used to access redis. Default port 6379
+```
+
+#### Step 5: Populate Redis With Data From OCL
+
+```shell
+# Command for populating Redis with OCL Data
+npm run terminology-redis
+```
+
+#### Step 6: Start Backend
+
+In the root directory of the project run the following command and the api will be running on port 3333
+
+```shell
+# Command for starting the backend api
+npm run terminology-api
+```
+
+#### Step 7: Start Frontend
+
+In the root directory of the project run the following command and the frontend will be running on port 4200
+
+```shell
+# Command for starting the frontend 
+npm run terminology-client
+```
+
+## Docker Installation 
+
+### Step 1: Clone Repo
+
+Clone this repository into your local directory, Use the command below:
+
+```bash
+# Clone project to a computer
+git clone https://github.com/Kuunika/kuunika
+
+# Navigate to the project root directory
+cd kuunika
+```
+
+### Step 2: Create/Edit .ENV File
+
+Copy and Rename the .env.example to .env, next modifiy the file.
+
+```shell
+# API key used to make request to the OCL API Service
+OCL_API_KEY='*'
+
+OCL_API='*' #Base URL Of OCL or URL of internally hosted instance of OCL, ex https://api.openconceptlab.org/
+
+OCL_CATEGORIES_API_URL='*' #URL of Source containing categories data that the api will route requests, ex: orgs/:OrgName/sources/:SampleSourceName/
+
+# ignore the following for the deploment of terminology service
+OCL_PRODUCT_MASTER_SOURCE=''
+OCL_PRODUCT_MASTER_DHIS2=''
+OCL_PRODUCT_MASTER_DHAMIS=''
+OCL_PRODUCT_MASTER_OPENLMIS=''
+# end of the ignored ENVs
+
+REDIS_HOST=* #Address of Redis instance host
+
+REDIS_PORT='6379' #Port used to access redis. Default port 6379
+```
+
+
+
+### Step 3: Building Map Files for 
+
+```shell
+# Creating Terminology-Api Map Files
+nx build terminology-api
+
+# Creating Terminology-Redis Map Files
+nx build terminology-redis
+
+# Creating Terminology-Client Map Files
+nx build terminology-client
+```
+
+
+
+### Step 4: Build Docker Images
+
+```shell
+# Creating Terminology-Api Image
+docker image build -t docker-terminology-api -f terminology-api.Dockerfile .
+
+# Creating Terminology-Redis Image
+docker image build -t docker-terminology-redis -f terminology-redis.Dockerfile .
+
+# Creating Terminology-client Image
+docker image build -t docker-terminology-client -f terminology-client.Dockerfile .
+```
+
+
+
+### Step 5: Run Docker Compose
+
+```shell
+# Run this command to setup the containers into a network
+docker-compose up
+```
+
+Once started await this message to be logged in the console.
+
+```shell
+docker-terminology-redis     | Terminology service cache successfully created.
+```
+
+
+
+After the message is displayed navigate to http://127.0.0.1 in a web browser.
+
+
+
+# Further Help
+
+### Addictional Information
+
+Additional information can be found on project's [Wiki](https://github.com/Kuunika/kuunika/wiki) 
+
+### Reporting Issues
+
+If you have noticed a bug, you can open an issue on our [Github](https://github.com/Kuunika/kuunika/issues) Repo Page and attempt to fix.

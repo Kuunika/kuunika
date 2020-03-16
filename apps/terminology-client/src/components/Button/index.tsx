@@ -61,6 +61,7 @@ function Btn(props: Props) {
         props.theme && props.theme === 'default' ? 'outlined' : 'contained'
       }
       onClick={props.onClick ? props.onClick : () => {}}
+      {...props}
     >
       {props.icon ? <IconWrapper>{props.icon}</IconWrapper> : <></>}
       {props.children}
