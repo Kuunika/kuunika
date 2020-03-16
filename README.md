@@ -173,11 +173,19 @@ docker image build -t docker-terminology-client -f terminology-client.Dockerfile
 ### Step 5: Run Docker Compose
 
 ```shell
-#
+# Run this command to setup the containers into a network
 docker-compose up
 ```
 
+Once started await this message to be logged in the console.
 
+```shell
+docker-terminology-redis     | Terminology service cache successfully created.
+```
+
+
+
+After the message is displayed navigate to http://127.0.0.1 in a web browser.
 
 
 
