@@ -8,8 +8,8 @@ export class SourcesController {
     constructor(private readonly sourceService: SourcesService, private readonly conceptService: ConceptsService) {}
     
     @Get(':sourceId')
-    getSource(@Param('sourceId') sourceId: string, @Query('filterTerm') term = ''){
-        return this.sourceService.getSource(sourceId.toUpperCase(), term);
+    getSource(@Param('sourceId') sourceId: string, @Query('filterTerm') term = '', @Query('pageNumber') pageNumber = 1){
+        return this.sourceService.getSource(sourceId.toUpperCase(), pageNumber, term);
     }
 
     @Get(':sourceId/:conceptId')

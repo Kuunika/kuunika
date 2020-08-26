@@ -5,12 +5,10 @@
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { RedisSingleton } from '@kuunika/redis-connection';
 require('dotenv').config();
 
 async function bootstrap() {
-  RedisSingleton.getInstance(Number.parseInt(process.env.REDIS_PORT), process.env.REDIS_HOST);
-  console.log('new build');
+  
   const app = await NestFactory.create(AppModule);
   const apiVersion = process.env.TERMINOLOGY_SERVICE_API_VERSION;
   const globalPrefix = `api/${apiVersion}`;

@@ -5,6 +5,7 @@
  * @param categoriesDescriptionFromOcl 
  */
 export function createCategoriesDescriptionsArray(categoriesDescriptionFromOcl: string){
+    console.log(categoriesDescriptionFromOcl);
     // Begins by separating the description string into array segments based the position of the ';' character
     return categoriesDescriptionFromOcl.split(';').map(oclCategoryDescription => {
         // Mapping through each element of the array to further subdivide the array based on the ':' character

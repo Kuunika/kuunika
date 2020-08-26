@@ -11,8 +11,6 @@ import { CategoryFromOCL, ConceptFromOCL } from "@kuunika/terminology-interfaces
 @Injectable()
 export class SearchService {
 
-  constructor(private readonly oclService: OclService) {}
-
   async searchAll(searchTerm: string): Promise<Search> {
     if(!RedisSingleton.getInstance().connected) {
       throw new HttpException({

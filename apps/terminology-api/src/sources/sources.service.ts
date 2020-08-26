@@ -1,6 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Source, Category, CategoryFromOCL, ConceptFromOCL } from '@kuunika/terminology-interfaces';
-import { RedisSingleton } from "@kuunika/redis-connection";
 import { SearchService } from '../search/search.service';
 import { OclService } from '../ocl/ocl.service';
 require('dotenv').config();
@@ -10,51 +9,31 @@ export class SourcesService {
 
   constructor(private readonly searchService: SearchService, private readonly oclService: OclService) {}
 
-  async getSource(sourceId: string, filterTerm?: string): Promise<Source> {
-    let categoryFromOCL;
-    let conceptsHeadings;
-    let conceptsFromOCL;
+  async getSource(sourceId: string, pageNumber = 1, filterTerm?: string): Promise<Source> {
+    const categoryFromOCL =  await this.oclService.requestCategoryFromOcl(sourceId);
+    const { data, ...payload} =  await this.oclService.requestAllConceptsFromCategory(categoryFromOCL.extras.Route, pageNumber);
 
-    if(RedisSingleton.getInstance().connected){
-      categoryFromOCL = await this.getCategoryFromCache(sourceId);
-      conceptsFromOCL =  await this.getConceptsFromCache(categoryFromOCL.extras.Route);
-    }else{
-      console.log('connection to redis failed now making request to OCL');
-      categoryFromOCL = await this.oclService.requestCategory(sourceId);
-      conceptsFromOCL =  await this.oclService.requestAllConceptsFromCategory(categoryFromOCL.extras.Route);
-    }
-    
     if(filterTerm !== '') {
-      conceptsHeadings = this.createConceptHeadings(categoryFromOCL.extras.Table);
-      return this.filterConcepts(categoryFromOCL, conceptsFromOCL, conceptsHeadings, filterTerm);
-
+      return {
+        ...payload,
+        ...await this.filterConcepts(categoryFromOCL, data, filterTerm)
+      };
     }
-    return this.createSourceObject(categoryFromOCL, conceptsFromOCL);
     
+    return {
+      ...payload,
+      ...await this.createSourceObject(categoryFromOCL, data),
+    };
+
   }
 
-  async getCategoryFromCache(field: string): Promise<CategoryFromOCL>{
-    const category = await RedisSingleton.convertHgetToObject<CategoryFromOCL>('categories', field);
-    if (category === null) {
-      throw new HttpException({
-        error: 404,
-        errorMessage: 'Source Category Not Found',
-      },HttpStatus.NOT_FOUND);
-    }
+  private filterConcepts(categoryFromOCL: CategoryFromOCL, conceptsFromOCL: ConceptFromOCL[], filterTerm: string) {
 
-    return category;
-    
-  }
+    const conceptsHeadings  = this.createConceptHeadings(categoryFromOCL.extras.Table);
+    const searchableList    = this.searchService.buildSearchableLists(conceptsFromOCL, conceptsHeadings);
+    const filteredTermsId   = this.searchService.searchConcepts(searchableList, conceptsHeadings, filterTerm).map(filtered => filtered.id);
+    const filteredConcepts  = conceptsFromOCL.filter(concept => filteredTermsId.includes(concept.id));
 
-  getConceptsFromCache(key: string){
-    return RedisSingleton.convertHvalsToArrayOfObjects<ConceptFromOCL>(key);
-  }
-
-  private filterConcepts(categoryFromOCL: CategoryFromOCL, conceptsFromOCL: ConceptFromOCL[], conceptsHeadings: string[], filterTerm: string) {
-    const keys = this.createConceptHeadings(categoryFromOCL.extras.Table);
-    const searchableList = this.searchService.buildSearchableLists(conceptsFromOCL, conceptsHeadings);
-    const filteredTermsId = this.searchService.searchConcepts(searchableList, keys, filterTerm).map(filtered => filtered.id);
-    const filteredConcepts = conceptsFromOCL.filter(concept => filteredTermsId.includes(concept.id));
     return this.createSourceObject(categoryFromOCL, filteredConcepts);
   }
 

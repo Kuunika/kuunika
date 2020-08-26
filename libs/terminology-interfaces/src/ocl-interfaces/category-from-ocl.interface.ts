@@ -56,3 +56,8 @@ interface Name {
     name_type:        string;
     type:             string;
 }
+
+interface OclRequestMetaData {
+    num_found: number;
+    
+}

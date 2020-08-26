@@ -11,17 +11,9 @@ export class CategoriesService {
   constructor(private readonly oclService: OclService) {}
 
   async getAllCategories(): Promise<Category[]> {
-    if(RedisSingleton.getInstance().connected){
-      const terminologyFromCache = await RedisSingleton.convertHvalsToArrayOfObjects<CategoryFromOCL>('categories');
-      return this.buildCategoriesTreeFromBreadcrumb(terminologyFromCache);
-
-    }else{
-      console.log('making request to OCL for categories');
       return this.buildCategoriesTreeFromBreadcrumb(
-        await this.oclService.requestAllCategories()
+        await this.oclService.requestAllCategoriesFromOcl()
       );
-
-    }
   }
 
   buildCategoriesTreeFromBreadcrumb(
@@ -35,7 +27,7 @@ export class CategoriesService {
         categories,
         breadcrumb.breadcrumb.split('/'),
         breadcrumb.id,
-        createCategoriesDescriptionsArray(breadcrumb.descriptions),
+        //createCategoriesDescriptionsArray(breadcrumb.descriptions),
         breadcrumb.icons
       )
     );
@@ -49,7 +41,7 @@ export class CategoriesService {
         breadcrumb: concept.extras.Category,
         id: concept.id,
         descriptions: concept.extras.Descriptions,
-        icons: (()=> concept.extras.Icon.split(','))()
+        icons: (() => concept.extras.Icon.split(','))()
       };
     });
   }
@@ -64,8 +56,8 @@ export class CategoriesService {
     categories: Category[],
     breadcrumbArray: string[],
     id: string,
-    descriptions: any,
     icons: string[],
+    descriptions?: any,
   ) {
 
     // Base Case - Checks to see if bread crumb array is complete
@@ -76,7 +68,7 @@ export class CategoriesService {
     const currentBreadcrumbPath = breadcrumbArray.shift();
 
     // gets description for category
-    const description = descriptions.find(descriptionsArray => currentBreadcrumbPath in descriptionsArray);
+    //const description = descriptions.find(descriptionsArray => currentBreadcrumbPath in descriptionsArray);
 
 
     // checks to see if the current depth of the array has an element with the same name as the bread crumb element
@@ -91,7 +83,8 @@ export class CategoriesService {
         id: breadcrumbArray.length === 0 ? id : null,
         categories: breadcrumbArray.length === 0 ? null : [],
         icons,
-        description: (() => description[currentBreadcrumbPath])()
+        description: 'null',
+        //description: (() => description[currentBreadcrumbPath])()
       });
 
       // recursive function call made with new category object,
@@ -99,8 +92,8 @@ export class CategoriesService {
         categories[categories.length - 1].categories,
         breadcrumbArray,
         id,
-        descriptions,
-        []
+        [],
+        'null'
       );
 
     } else {
@@ -110,8 +103,8 @@ export class CategoriesService {
         categories[existingElementIndex].categories,
         breadcrumbArray,
         id,
-        descriptions,
-        []
+        [],
+        'null'
       );
     }
   }
