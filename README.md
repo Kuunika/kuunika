@@ -1,4 +1,5 @@
 # Kuunika
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Kuunika/kuunika)
 
 This project was generated using [Nx](https://nx.dev).
 
